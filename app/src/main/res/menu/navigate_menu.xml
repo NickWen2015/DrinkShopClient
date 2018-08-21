@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_News"
+        android:icon="@drawable/ic_new"
+        android:title="@string/textNews"
+        />
+    <item
+        android:id="@+id/item_Product"
+        android:icon="@drawable/ic_product"
+        android:title="@string/textProduct"
+        />
+
+    <item
+        android:id="@+id/item_Member"
+        android:icon="@drawable/ic_member"
+        android:title="@string/textMember"
+        />
+
+    <item
+        android:id="@+id/item_Settings"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/textSettings"
+        />
+
+</menu>

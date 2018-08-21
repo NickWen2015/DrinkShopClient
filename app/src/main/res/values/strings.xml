@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DrinkShopClient</string>
+    <string name="textNews">最新消息</string>
+    <string name="textProduct">商品頁面</string>
+    <string name="textMember">會員中心</string>
+    <string name="textMap">地圖</string>
+    <string name="textSettings">設定</string>
 </resources>
