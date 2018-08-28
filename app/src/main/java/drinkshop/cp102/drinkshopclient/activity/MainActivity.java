@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import drinkshop.cp102.drinkshopclient.fragment.MapFragment;
 import drinkshop.cp102.drinkshopclient.fragment.NewsFragment;
 import drinkshop.cp102.drinkshopclient.R;
+import drinkshop.cp102.drinkshopclient.fragment.ProductPageFragment;
 import drinkshop.cp102.drinkshopclient.fragment.SettingsFragment;
 import drinkshop.cp102.drinkshopclient.helper.BottomNavigationViewHelper;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 setTitle(R.string.textNews);
                 return true;
             case R.id.item_Product:  //產品頁面
-                fragment = new MapFragment();
+                fragment = new ProductPageFragment();
                 changeFragment(fragment);
                 setTitle(R.string.textProduct);
                 return true;
