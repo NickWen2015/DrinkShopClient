@@ -1,4 +1,4 @@
-package drinkshop.cp102.drinkshopclient;
+package drinkshop.cp102.drinkshopclient.bean;
 
 public class News {
     private String title, detail;

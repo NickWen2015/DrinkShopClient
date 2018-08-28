@@ -1,10 +1,12 @@
-package drinkshop.cp102.drinkshopclient;
+package drinkshop.cp102.drinkshopclient.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import drinkshop.cp102.drinkshopclient.R;
 
 public class SettingsFragment extends Fragment {
     @Override

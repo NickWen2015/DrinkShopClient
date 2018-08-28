@@ -1,4 +1,4 @@
-package drinkshop.cp102.drinkshopclient;
+package drinkshop.cp102.drinkshopclient.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import drinkshop.cp102.drinkshopclient.bean.News;
+import drinkshop.cp102.drinkshopclient.R;
 
 public class NewsFragment extends Fragment {
 

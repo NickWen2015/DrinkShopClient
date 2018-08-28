@@ -1,4 +1,4 @@
-package drinkshop.cp102.drinkshopclient;
+package drinkshop.cp102.drinkshopclient.helper;
 
 import android.annotation.SuppressLint;
 import android.support.design.internal.BottomNavigationItemView;
@@ -8,6 +8,11 @@ import android.util.Log;
 
 import java.lang.reflect.Field;
 
+/**
+ * 改善 Navigation 外觀
+ * @author mrosstro
+ * @date 2018/8/28
+ * */
 public class BottomNavigationViewHelper {
     @SuppressLint("RestrictedApi")
     public static void disableShiftMode(BottomNavigationView view) {
