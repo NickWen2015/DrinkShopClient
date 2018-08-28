@@ -23,7 +23,7 @@ import drinkshop.cp102.drinkshopclient.helper.BottomNavigationViewHelper;
  * */
 public class MainActivity extends AppCompatActivity {
 
-
+//aa
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
 
     public MainActivity() {
