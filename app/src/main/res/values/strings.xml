@@ -1,8 +1,34 @@
 <resources>
     <string name="app_name">DrinkShopClient</string>
+    <!--BottomNavigationView start-->
     <string name="textNews">最新消息</string>
     <string name="textProduct">商品頁面</string>
     <string name="textMember">會員中心</string>
     <string name="textMap">地圖</string>
     <string name="textSettings">設定</string>
+    <!--BottomNavigationView end-->
+    <!--會員中心 start-->
+    <string name="textMemberHint">請輸入帳號</string>
+    <string name="textPasswordHint">請輸入密碼</string>
+    <string name="textConfirmPasswordHint">請再次輸入確認密碼</string>
+    <string name="textMemberLogin">會員登入</string>
+    <string name="textMemberRegister">會員註冊</string>
+    <string name="textSubmit">確認送出</string>
+    <string name="textFastLogin">快速登入</string>
+    <string name="textMale">男</string>
+    <string name="textFemale">女</string>
+    <string name="textRegisterPhoneHint">請輸入手機號碼</string>
+    <string name="textRegisterEmailHint">請輸入e-mail</string>
+    <string name="textRegisterAddressHint">請輸入住址(外送住址)</string>
+    <string name="textMemberMenuModify">會員資料修改</string>
+    <string name="textMemberMenuHistory">歷史購買紀錄</string>
+    <string name="textMemberMenuOrderStatus">查詢訂單狀況</string>
+    <string name="textMemberMenuCoupon">優惠卷管理</string>
+    <!--會員中心 end-->
+
+
+    <!--error start-->
+    <string name="textRegisterConfirmPasswordError">密碼輸入與第一次不相同,請重新輸入</string>
+
+    <!--error end-->
 </resources>

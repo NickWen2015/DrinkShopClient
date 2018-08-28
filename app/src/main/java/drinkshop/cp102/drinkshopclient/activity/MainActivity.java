@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import drinkshop.cp102.drinkshopclient.fragment.MapFragment;
+import drinkshop.cp102.drinkshopclient.fragment.MemberFragment;
 import drinkshop.cp102.drinkshopclient.fragment.NewsFragment;
 import drinkshop.cp102.drinkshopclient.R;
 import drinkshop.cp102.drinkshopclient.fragment.ProductPageFragment;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 setTitle(R.string.textProduct);
                 return true;
             case R.id.item_Member:  //會員中心
-                fragment = new MapFragment();
+                fragment = new MemberFragment();
                 changeFragment(fragment);
                 setTitle(R.string.textMember);
                 return true;

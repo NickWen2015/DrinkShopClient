@@ -3,4 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <!--會員中心 start-->
+    <color name="colorBtnRegister">#69F0AE</color>
+    <color name="colorBtnLogin">#0091EA</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorMemberModify">#66ffff</color>
+    <color name="colorMemberHistory">#ffccff</color>
+    <color name="colorMemberOrderStatus">#b3ffcc</color>
+    <color name="colorMemberCoupon">#ffff99</color>
+    <!--會員中心 end-->
 </resources>
