@@ -13,6 +13,6 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.map_fragment, container, false);
-        return view;
+        return view;//test commit
     }
 }
