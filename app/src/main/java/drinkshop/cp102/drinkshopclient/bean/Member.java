@@ -8,7 +8,7 @@ public class Member implements Serializable{
     private String member_account;
     private String member_password;
     private String member_name;
-    private Date member_birthday;
+    private String member_birthday;
     private String member_mobile;
     private String member_email;
     private String member_address;
@@ -19,7 +19,7 @@ public class Member implements Serializable{
         super();
     }
 
-    public Member(int member_id, String member_account, String member_password, String member_name, Date member_birthday, String member_mobile, String member_email, String member_address, String member_status) {
+    public Member(int member_id, String member_account, String member_password, String member_name, String member_birthday, String member_mobile, String member_email, String member_address, String member_status) {
         this.member_id = member_id;
         this.member_account = member_account;
         this.member_password = member_password;
@@ -63,11 +63,11 @@ public class Member implements Serializable{
         this.member_name = member_name;
     }
 
-    public Date getMember_birthday() {
+    public String getMember_birthday() {
         return member_birthday;
     }
 
-    public void setMember_birthday(Date member_birthday) {
+    public void setMember_birthday(String member_birthday) {
         this.member_birthday = member_birthday;
     }
 

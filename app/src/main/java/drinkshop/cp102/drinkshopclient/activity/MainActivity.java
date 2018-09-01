@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import drinkshop.cp102.drinkshopclient.fragment.MapFragment;
 import drinkshop.cp102.drinkshopclient.fragment.MemberFragment;
 import drinkshop.cp102.drinkshopclient.fragment.NewsFragment;
 import drinkshop.cp102.drinkshopclient.R;

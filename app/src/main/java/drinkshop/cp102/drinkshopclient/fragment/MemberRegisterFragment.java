@@ -8,16 +8,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import drinkshop.cp102.drinkshopclient.R;
 
+
+import drinkshop.cp102.drinkshopclient.R;
+import drinkshop.cp102.drinkshopclient.bean.Member;
+
+/**
+ * 會員註冊頁
+ * @author Nick
+ * @date 2018/8/30
+ */
 public class MemberRegisterFragment extends Fragment {
 
-    /****會員註冊頁****/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getActivity()!=null){
+        if (getActivity() != null) {
             getActivity().setTitle(R.string.textMemberRegister);
         }
     }
@@ -26,7 +33,7 @@ public class MemberRegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.member_register_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_member_register, container, false);
         handleViews(view);
         return view;
     }
@@ -43,7 +50,29 @@ public class MemberRegisterFragment extends Fragment {
         final EditText etRegisterAddress = view.findViewById(R.id.etRegisterAddress);
         Button btRegisterSubmit = view.findViewById(R.id.btRegisterSubmit);
 
-        btRegisterSubmit.setOnClickListener(new View.OnClickListener() {//傳統型
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            Bundle bundleMemberData = bundle.getBundle("bundleMemberData");
+            Bundle bundleMemberStatus = bundle.getBundle("bundleMemberStatus");
+            if (bundleMemberData != null) {
+                Member member2modify = (Member) bundleMemberData.getSerializable("member2modify");
+                if (member2modify != null) {
+                    etRegisterAccount.setText(member2modify.getMember_account());
+                    etRegisterPassword.setText(member2modify.getMember_password());
+                    etRegisterConfirmPassword.setText(member2modify.getMember_password());
+                    etRegisterPhone.setText(member2modify.getMember_mobile());
+                    etRegisterEmail.setText(member2modify.getMember_email());
+                    etRegisterAddress.setText(member2modify.getMember_address());
+                }
+
+            }
+            if (bundleMemberStatus != null) {
+                if (bundleMemberStatus.getString("modify").equals("modify")) {
+                    btRegisterSubmit.setText(R.string.textModifySubmit);
+                }
+            }
+        }
+        btRegisterSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean isValid = isValid(etRegisterPassword, etRegisterConfirmPassword);
@@ -66,7 +95,9 @@ public class MemberRegisterFragment extends Fragment {
 
     }
 
-    /* 檢查兩次輸入密碼是否相同 */
+    /**
+     * 檢查兩次輸入密碼是否相同
+     */
     private boolean isValid(EditText registerPassword, EditText registerConfirmPassword) {
         /* 檢查輸入文字的格式是否為0~100的整數 */
         String textRegisterPassword = registerPassword.getText().toString();
