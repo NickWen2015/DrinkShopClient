@@ -52,12 +52,15 @@ public void onCreate(Bundle savedInstanceState) {
         cvMemberModify.setOnClickListener(listener);
     }
 
+    /**
+     * 會員功能按鈕監聽器,監聽按哪個功能
+     **/
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             int id = v.getId();
             switch (id){
-                case R.id.cvMemberModify:
+                case R.id.cvMemberModify://會員資料修改
                     Bundle mainBundle = new Bundle();
                     Bundle bundleMemberData = new Bundle();
                     Bundle bundleMemberStatus = new Bundle();
@@ -72,11 +75,11 @@ public void onCreate(Bundle savedInstanceState) {
                     transaction.addToBackStack("fragmentMemberRegisterModify");
                     transaction.commit();
                     break;
-                case R.id.cvMemberHistory:
+                case R.id.cvMemberHistory://訂單歷史紀錄
                     break;
-                case R.id.cvMemberOrderStatus:
+                case R.id.cvMemberOrderStatus://訂單狀態查詢
                     break;
-                case R.id.cvMemberCoupon:
+                case R.id.cvMemberCoupon://會員優惠卷管理
                     break;
                 default:
                     break;

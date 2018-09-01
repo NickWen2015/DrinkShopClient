@@ -47,6 +47,9 @@ public class MemberFragment extends Fragment {
         Button btRegister = view.findViewById(R.id.btRegister);
         Button btLogin = view.findViewById(R.id.btLogin);
 
+        /**
+         * 導向會員註冊fragment
+         **/
         btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +64,9 @@ public class MemberFragment extends Fragment {
             }
         });
 
-
+        /**
+         * 登入驗證,成功導向會員功能,失敗顯示訊息
+         **/
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
