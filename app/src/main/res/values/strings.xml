@@ -6,6 +6,7 @@
     <string name="textMember">會員中心</string>
     <string name="textMap">地圖</string>
     <string name="textSettings">設定</string>
+    <string name="textShoppingCart">購物車</string>
     <!--BottomNavigationView end-->
     <!--會員中心 start-->
     <string name="textMemberHint">請輸入帳號</string>
