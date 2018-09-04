@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorGray">#7e7779</color>
+
     <!--會員中心 start-->
     <color name="colorBtnRegister">#69F0AE</color>
     <color name="colorBtnLogin">#0091EA</color>
