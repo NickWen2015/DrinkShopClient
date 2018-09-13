@@ -2,15 +2,12 @@ package drinkshop.cp102.drinkshopclient.helper;
 
 import android.util.Log;
 
-
 /**
  * LogHelper.e("MainActivity", "------------------");
  * Log小幫手（開關設定關閉即可關閉所有Log）
  *
  **/
 public class LogHelper {
-    private static String tag;
-    private static String msg;
     private static boolean condition = true;  //開關
 
     public LogHelper() { }

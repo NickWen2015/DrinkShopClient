@@ -1,4 +1,4 @@
-package drinkshop.cp102.drinkshopclient.fragment;
+package drinkshop.cp102.drinkshopclient.amain.settings;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

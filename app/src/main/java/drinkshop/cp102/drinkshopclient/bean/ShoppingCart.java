@@ -1,10 +1,11 @@
 package drinkshop.cp102.drinkshopclient.bean;
 
 public class ShoppingCart {
-    private long id;
+    private int ID;
+    private int ProductID;
     private String Category;
     private String ProductName;
-    private int HotOrice;
+    private int HotOrIce;
     private int Size;
     private int SizePrice;
     private int Quantity;
@@ -14,12 +15,45 @@ public class ShoppingCart {
     public ShoppingCart(){
     }
 
-    public long getId() {
-        return id;
+    public ShoppingCart(int productID, String category, String productName, int hotOrIce, int size, int sizePrice, int quantity, int suger, int temperature) {
+        ProductID = productID;
+        Category = category;
+        ProductName = productName;
+        HotOrIce = hotOrIce;
+        Size = size;
+        SizePrice = sizePrice;
+        Quantity = quantity;
+        Suger = suger;
+        Temperature = temperature;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public ShoppingCart(int ID, int productID, String category, String productName, int hotOrIce, int size, int sizePrice, int quantity, int suger, int temperature) {
+        this.ID = ID;
+        ProductID = productID;
+        Category = category;
+        ProductName = productName;
+        HotOrIce = hotOrIce;
+        Size = size;
+        SizePrice = sizePrice;
+        Quantity = quantity;
+        Suger = suger;
+        Temperature = temperature;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getProductID() {
+        return ProductID;
+    }
+
+    public void setProductID(int productID) {
+        ProductID = productID;
     }
 
     public String getCategory() {
@@ -38,12 +72,12 @@ public class ShoppingCart {
         ProductName = productName;
     }
 
-    public int getHotOrice() {
-        return HotOrice;
+    public int getHotOrIce() {
+        return HotOrIce;
     }
 
-    public void setHotOrice(int hotOrice) {
-        HotOrice = hotOrice;
+    public void setHotOrIce(int hotOrIce) {
+        HotOrIce = hotOrIce;
     }
 
     public int getSize() {

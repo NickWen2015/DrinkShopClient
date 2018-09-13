@@ -6,67 +6,59 @@ package drinkshop.cp102.drinkshopclient.bean;
  * @date 2018/8/29
  * */
 public class Product {
-    private String productCategory;
-    private int productImg;
-    private String productName;
-    private int productMPrice;
-    private int productLPrice;
-    private int productQuantity;
+    private int id;
+    private String Category;
+    private String Name;
+    private int MPrice;
+    private int LPrice;
 
-    public Product(String productCategory, int productImg, String productName, int productMPrice, int productLPrice, int productQuantity) {
-        this.productCategory = productCategory;
-        this.productImg = productImg;
-        this.productName = productName;
-        this.productMPrice = productMPrice;
-        this.productLPrice = productLPrice;
-        this.productQuantity = productQuantity;
+    public Product() { }
+
+    public Product(int id, String category, String name, int MPrice, int LPrice) {
+        this.id = id;
+        Category = category;
+        Name = name;
+        this.MPrice = MPrice;
+        this.LPrice = LPrice;
     }
 
-    public String getProductCategory() {
-        return productCategory;
+    public int getId() {
+        return id;
     }
 
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getProductImg() {
-        return productImg;
+    public String getCategory() {
+        return Category;
     }
 
-    public void setProductImg(int productImg) {
-        this.productImg = productImg;
+    public void setCategory(String category) {
+        Category = category;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return Name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public int getProductMPrice() {
-        return productMPrice;
+    public int getMPrice() {
+        return MPrice;
     }
 
-    public void setProductMPrice(int productMPrice) {
-        this.productMPrice = productMPrice;
+    public void setMPrice(int MPrice) {
+        this.MPrice = MPrice;
     }
 
-    public int getProductLPrice() {
-        return productLPrice;
+    public int getLPrice() {
+        return LPrice;
     }
 
-    public void setProductLPrice(int productLPrice) {
-        this.productLPrice = productLPrice;
-    }
-
-    public int getProductQuantity() {
-        return productQuantity;
-    }
-
-    public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
+    public void setLPrice(int LPrice) {
+        this.LPrice = LPrice;
     }
 }

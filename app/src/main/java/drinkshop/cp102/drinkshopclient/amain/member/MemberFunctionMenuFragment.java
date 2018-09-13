@@ -1,10 +1,8 @@
-package drinkshop.cp102.drinkshopclient.fragment;
+package drinkshop.cp102.drinkshopclient.amain.member;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -12,26 +10,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import drinkshop.cp102.drinkshopclient.Common;
 import drinkshop.cp102.drinkshopclient.R;
-import drinkshop.cp102.drinkshopclient.activity.LoginDialogActivity;
 import drinkshop.cp102.drinkshopclient.bean.Member;
+import drinkshop.cp102.drinkshopclient.fragment.MemberCouponFragment;
+import drinkshop.cp102.drinkshopclient.fragment.MemberHistoryFragment;
 import drinkshop.cp102.drinkshopclient.task.MyTask;
 
 import static android.app.Activity.RESULT_OK;

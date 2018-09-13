@@ -1,23 +1,14 @@
-package drinkshop.cp102.drinkshopclient.fragment;
+package drinkshop.cp102.drinkshopclient.amain.member;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
-
-import java.util.Calendar;
-
 import drinkshop.cp102.drinkshopclient.R;
-import drinkshop.cp102.drinkshopclient.activity.MainActivity;
 import drinkshop.cp102.drinkshopclient.bean.Member;
 
 /**

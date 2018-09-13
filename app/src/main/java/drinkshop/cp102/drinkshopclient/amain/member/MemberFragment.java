@@ -1,4 +1,4 @@
-package drinkshop.cp102.drinkshopclient.fragment;
+package drinkshop.cp102.drinkshopclient.amain.member;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

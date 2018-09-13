@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.AddingProductToShoppingCartActivity"
+    tools:context=".amain.addingproduct.AddingProductToShoppingCartActivity"
     android:orientation="vertical">
 
 
@@ -206,10 +206,10 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnAddingProductToShoppingCard"
+            android:id="@+id/btnAddingProductToShoppingCart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="onClickAddingProductToShoppingCard"
-            android:text="加入購物車" />
+            android:onClick="onClickAddingProductToShoppingCart"
+            android:text="@string/text_EditProductToShoppingCart" />
     </LinearLayout>
 </LinearLayout>

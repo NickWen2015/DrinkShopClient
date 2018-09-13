@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="drinkshop.cp102.drinkshopclient">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -11,18 +13,27 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+
+        <activity
+            android:name=".amain.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.LoginDialogActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.AddingProductToShoppingCartActivity"></activity>
-        <activity android:name=".activity.ShoppingCartActivity"></activity>
+
+        <activity
+            android:name=".amain.addingproduct.AddingProductToShoppingCartActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".amain.shoppingcart.ShoppingCartActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

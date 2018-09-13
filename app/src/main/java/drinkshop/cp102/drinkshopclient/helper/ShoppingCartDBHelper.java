@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import drinkshop.cp102.drinkshopclient.bean.AddingProduct;
 import drinkshop.cp102.drinkshopclient.bean.ShoppingCart;
+import drinkshop.cp102.drinkshopclient.bean.ShoppingCartTotol;
 
 /**
  * 購物車資料庫（尚未結帳前先將購買的物品儲存在手機中）
@@ -19,10 +19,13 @@ import drinkshop.cp102.drinkshopclient.bean.ShoppingCart;
  * @date 2018/9/2
  */
 public class ShoppingCartDBHelper extends SQLiteOpenHelper {
+    public static final String TAG = "ShoppingCartDBHelper";
     private static final String DATABASE_NAME = "DrinkShop.db";  //資料庫名稱
     private static final int DATABASE_VERSION = 1;  //資料庫版本
 
     private static final String TABLE_NAME = "shoppingcart";  //資料表名稱
+    private static final String ID = "_id";
+    private static final String PRODUCT_ID = "product_id";  //商品類型
     private static final String CATEGORY = "category";  //商品類型
     private static final String PRODUCT_NAME = "productname";  //商品名稱
     private static final String HOT_ICE = "hotOrice";  //商品冷熱
@@ -35,7 +38,8 @@ public class ShoppingCartDBHelper extends SQLiteOpenHelper {
     /* 新增資料表 */
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + "(" +
-                    "_id INTEGER PRIMARY KEY NOT NULL , " +
+                    " " + ID + " INTEGER PRIMARY KEY NOT NULL , " +
+                    PRODUCT_ID + " INTEGER NOT NULL, " +
                     CATEGORY + " VARCHAR NOT NULL, " +
                     PRODUCT_NAME + " VARCHAR NOT NULL, " +
                     HOT_ICE + " INTEGER NOT NULL, " +
@@ -67,35 +71,60 @@ public class ShoppingCartDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        super.onDowngrade(db, oldVersion, newVersion);
+        db.execSQL(SQL_DELETE_ENTRIES);
+        onCreate(db);
     }
 
     /**
      * 新增購買的商品
      */
-    public void addProduct(AddingProduct addingProduct) {
+    public void addProduct(ShoppingCart shoppingCart) {
         ContentValues values = new ContentValues();
-        values.put(CATEGORY, addingProduct.getMyCategory());
-        values.put(PRODUCT_NAME, addingProduct.getMyProductName());
-        values.put(HOT_ICE, addingProduct.getMyHotOrIce());
-        values.put(SIZE, addingProduct.getMySize());
-        values.put(SIZE_PRICE, addingProduct.getMySizePrice());
-        values.put(QUANTITY, addingProduct.getMyQuantity());
-        values.put(SUGER, addingProduct.getMySuger());
-        values.put(TEMPERATURE, addingProduct.getMyTemperature());
+        values.put(PRODUCT_ID, shoppingCart.getProductID());
+        values.put(CATEGORY, shoppingCart.getCategory());
+        values.put(PRODUCT_NAME, shoppingCart.getProductName());
+        values.put(HOT_ICE, shoppingCart.getHotOrIce());
+        values.put(SIZE, shoppingCart.getSize());
+        values.put(SIZE_PRICE, shoppingCart.getSizePrice());
+        values.put(QUANTITY, shoppingCart.getQuantity());
+        values.put(SUGER, shoppingCart.getSuger());
+        values.put(TEMPERATURE, shoppingCart.getTemperature());
         getWritableDatabase().insert(TABLE_NAME, null, values);
     }
 
     /**
      * 修改購買的商品
      */
-    public void updateProduct() {
+    public int updateProduct(int rowId, ShoppingCart shoppingCart) {
+        final String WHERE = " " + ID + " = " + rowId;
+        ContentValues values = new ContentValues();
+        values.put(PRODUCT_ID, shoppingCart.getProductID());
+        values.put(CATEGORY, shoppingCart.getCategory());
+        values.put(PRODUCT_NAME, shoppingCart.getProductName());
+        values.put(HOT_ICE, shoppingCart.getHotOrIce());
+        values.put(SIZE, shoppingCart.getSize());
+        values.put(SIZE_PRICE, shoppingCart.getSizePrice());
+        values.put(QUANTITY, shoppingCart.getQuantity());
+        values.put(SUGER, shoppingCart.getSuger());
+        values.put(TEMPERATURE, shoppingCart.getTemperature());
+        return getWritableDatabase().update(
+                TABLE_NAME,      //資料表名稱
+                values,          //VALUE
+                WHERE,           //WHERE
+                null  //WHERE的參數
+        );
     }
 
     /**
      * 刪除購買的商品
      */
-    public void deleteProduct() {
+    public void deleteProduct(int rowId) {
+        final String WHERE = " " + ID + " = " + rowId;
+        getWritableDatabase().delete(
+                TABLE_NAME,       //資料表名稱
+                WHERE,            //WHERE
+                null   //WHERE的參數
+        );
     }
 
     /**
@@ -117,10 +146,44 @@ public class ShoppingCartDBHelper extends SQLiteOpenHelper {
      */
     public List<ShoppingCart> readProductQuantity(String productName) {
         List<ShoppingCart> result = new ArrayList<>();
-        String where = PRODUCT_NAME + "=" + "'" + productName + "'";
-        Cursor cursor = getReadableDatabase().query(TABLE_NAME, null, where, null, null, null, null);
+        final String WHERE = " " + PRODUCT_NAME + " = " + " '" + productName + "' ";
+        Cursor cursor = getReadableDatabase().query(TABLE_NAME, new String[]{QUANTITY}, WHERE, null, null, null, null);
+        while (cursor.moveToNext()) {
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.setQuantity(cursor.getInt(0));
+            LogHelper.e(TAG, "readProductQuantity：商品：" + productName + " 數量：" + cursor.getInt(0));
+            result.add(shoppingCart);
+        }
+        cursor.close();
+        return result;
+    }
+
+    /**
+     * 顯示選取商品的資訊
+     */
+    public List<ShoppingCart> readEditProductDetail(int rowId) {
+        List<ShoppingCart> result = new ArrayList<>();
+        final String WHERE = " " + ID + " = " + rowId;
+        Cursor cursor = getReadableDatabase().query(TABLE_NAME, null, WHERE, null, null, null, null);
         while (cursor.moveToNext()) {
             result.add(getRecord(cursor));
+        }
+        cursor.close();
+        return result;
+    }
+
+    /**
+     * 取的總杯數及總金額
+     */
+    public List<ShoppingCartTotol> readTotalCapAndTotalAmount() {
+        List<ShoppingCartTotol> result = new ArrayList<>();
+        Cursor cursor = getReadableDatabase().query(TABLE_NAME, new String[]{SIZE_PRICE, QUANTITY}, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            ShoppingCartTotol shoppingCartTotol = new ShoppingCartTotol();
+            shoppingCartTotol.setPrice(cursor.getInt(0));
+            shoppingCartTotol.setQuantity(cursor.getInt(1));
+            LogHelper.e(TAG, "readTotalCapAndTotalAmount：價錢：" + cursor.getInt(0) + " 數量：" + cursor.getInt(1));
+            result.add(shoppingCartTotol);
         }
         cursor.close();
         return result;
@@ -130,19 +193,29 @@ public class ShoppingCartDBHelper extends SQLiteOpenHelper {
     public ShoppingCart getRecord(Cursor cursor) {
         // 準備回傳結果用的物件
         ShoppingCart result = new ShoppingCart();
+        result.setID(cursor.getInt(0));
+        result.setProductID(cursor.getInt(1));
+        result.setCategory(cursor.getString(2));
+        result.setProductName(cursor.getString(3));
+        result.setHotOrIce(cursor.getInt(4));
+        result.setSize(cursor.getInt(5));
+        result.setSizePrice(cursor.getInt(6));
+        result.setQuantity(cursor.getInt(7));
+        result.setSuger(cursor.getInt(8));
+        result.setTemperature(cursor.getInt(9));
+        LogHelper.e(TAG, "readAllProduct：" + "\n" +
+                "ID：" + cursor.getInt(0) + "\n" +
+                "商品ID：" + cursor.getInt(1) + "\n" +
+                "類別：" + cursor.getInt(2) + "\n" +
+                "名稱：" + cursor.getInt(3) + "\n" +
+                "熱度：" + cursor.getInt(4) + "\n" +
+                "大小：" + cursor.getInt(5) + "\n" +
+                "單價：" + cursor.getInt(6) + "\n" +
+                "數量：" + cursor.getInt(7) + "\n" +
+                "甜度：" + cursor.getInt(8) + "\n" +
+                "微度：" + cursor.getInt(9));
 
-        result.setId(cursor.getLong(0));
-        result.setCategory(cursor.getString(1));
-        result.setProductName(cursor.getString(2));
-        result.setHotOrice(cursor.getInt(3));
-        result.setSize(cursor.getInt(4));
-        result.setSizePrice(cursor.getInt(5));
-        result.setQuantity(cursor.getInt(6));
-        result.setSuger(cursor.getInt(7));
-        result.setTemperature(cursor.getInt(8));
         // 回傳結果
         return result;
     }
-
-
 }
