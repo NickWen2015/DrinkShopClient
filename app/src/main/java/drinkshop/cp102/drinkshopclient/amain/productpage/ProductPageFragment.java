@@ -36,14 +36,22 @@ public class ProductPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View viewPagerFragment = inflater.inflate(R.layout.fragment_productpage, container, false);
         activity = getActivity();
+        ProductRecyclerView(viewPagerFragment, inflater);
+        LogHelper.e(TAG, "onCreateView：成功");
+        return viewPagerFragment;
+    }
+
+    /**
+     * 商品列表（RecyclerView）
+     * */
+    private void ProductRecyclerView(View viewPagerFragment, LayoutInflater inflater) {
         RecyclerView rvRecyclerView = viewPagerFragment.findViewById(R.id.rvRecyclerView);
         rvRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));  //主管 使用線性顯示（外模板）
         if (adapter == null) {  //如果adapter沒有被產生出來就產生
-            adapter = new ProductAdapter(activity, inflater, getProduct());
+            adapter = new ProductAdapter(activity, getProduct());
         }
         rvRecyclerView.setAdapter(adapter);  //員工（內模板）
-        LogHelper.e(TAG, "onCreateView：執行成功");
-        return viewPagerFragment;
+        LogHelper.e(TAG, "ProductRecyclerView： 成功");
     }
 
     /**

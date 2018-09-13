@@ -38,9 +38,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     /**
      * 初始化
      */
-    public ProductAdapter(Activity activity, LayoutInflater inflater, List<Product> products) {
+    public ProductAdapter(Activity activity, List<Product> products) {
         this.activity = activity;
-        this.inflater = inflater;
+        this.inflater = LayoutInflater.from(activity);
         this.products = products;
     }
 

@@ -24,8 +24,6 @@ import com.google.gson.JsonObject;
 import drinkshop.cp102.drinkshopclient.Common;
 import drinkshop.cp102.drinkshopclient.R;
 import drinkshop.cp102.drinkshopclient.bean.Member;
-import drinkshop.cp102.drinkshopclient.fragment.MemberCouponFragment;
-import drinkshop.cp102.drinkshopclient.fragment.MemberHistoryFragment;
 import drinkshop.cp102.drinkshopclient.task.MyTask;
 
 import static android.app.Activity.RESULT_OK;

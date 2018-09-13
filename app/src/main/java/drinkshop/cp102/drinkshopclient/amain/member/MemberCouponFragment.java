@@ -1,4 +1,4 @@
-package drinkshop.cp102.drinkshopclient.fragment;
+package drinkshop.cp102.drinkshopclient.amain.member;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,20 +20,21 @@ import java.util.List;
 
 import drinkshop.cp102.drinkshopclient.R;
 import drinkshop.cp102.drinkshopclient.bean.Coupon;
+import drinkshop.cp102.drinkshopclient.bean.Member;
 
 /**
- * 歷史購買紀錄頁
+ * 優惠卷管理頁
  * @author Nick
  * @date 2018/9/1
  */
-public class MemberHistoryFragment extends Fragment {
+public class MemberCouponFragment extends Fragment {
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getActivity() != null) {
-            getActivity().setTitle(R.string.textMemberHistory);
+            getActivity().setTitle(R.string.textMemberCoupon);
         }
     }
 
