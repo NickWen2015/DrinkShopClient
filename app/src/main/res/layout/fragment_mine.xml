@@ -7,21 +7,21 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="162dp"
+        android:layout_height="150dp"
         android:background="#e7e7e7">
 
         <android.support.v7.widget.CardView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="15dp">
 
             <ImageView
                 android:id="@+id/img_head"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/default_head" />
 
         </android.support.v7.widget.CardView>
@@ -31,8 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="83dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginTop="60dp"
             android:gravity="center"
             android:text="未登入"
             android:textColor="@color/colorBlack"
@@ -42,10 +42,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:padding="13dp"
-        android:background="#e7e7e7">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -68,8 +65,8 @@
 
                     <ImageView
                         android:id="@+id/ivMemberModify"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:layout_marginLeft="15dp"
                         android:src="@drawable/member_menu_modify" />
 
@@ -103,8 +100,8 @@
 
                     <ImageView
                         android:id="@+id/ivMemberHistory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:layout_marginLeft="15dp"
                         android:src="@drawable/member_menu_history" />
 
@@ -138,8 +135,8 @@
 
                     <ImageView
                         android:id="@+id/ivMemberOrderStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:layout_marginLeft="15dp"
                         android:src="@drawable/member_menu_order_status" />
 
@@ -168,13 +165,13 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:padding="6dp">
 
                     <ImageView
                         android:id="@+id/ivMemberCoupon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:layout_marginLeft="15dp"
                         android:src="@drawable/member_menu_coupon" />
 
@@ -192,6 +189,7 @@
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

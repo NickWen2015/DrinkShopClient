@@ -13,5 +13,7 @@
     <color name="colorMemberHistory">#ffccff</color>
     <color name="colorMemberOrderStatus">#b3ffcc</color>
     <color name="colorMemberCoupon">#ffff99</color>
+    <color name="colorBlack">#000000</color>
+    <color name="btcheckout">#5F94D2</color>
     <!--會員中心 end-->
 </resources>

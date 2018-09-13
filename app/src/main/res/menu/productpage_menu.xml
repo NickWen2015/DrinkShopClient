@@ -6,4 +6,8 @@
         android:icon="@drawable/ic_shopping_cart_black_24dp"
         android:title="@string/textShoppingCart"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/logout"
+        android:title="@string/textLogout"
+        app:showAsAction="always" />
 </menu>

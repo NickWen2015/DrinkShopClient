@@ -1,31 +1,43 @@
 package drinkshop.cp102.drinkshopclient.fragment;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 
+import java.util.Calendar;
 
 import drinkshop.cp102.drinkshopclient.R;
+import drinkshop.cp102.drinkshopclient.activity.MainActivity;
 import drinkshop.cp102.drinkshopclient.bean.Member;
 
 /**
  * 會員註冊頁
+ *
  * @author Nick
  * @date 2018/8/30
  */
 public class MemberRegisterFragment extends Fragment {
-
+    private EditText etRegisterAccount, etRegisterPassword, etRegisterConfirmPassword,
+            etRegisterPhone, etRegisterEmail, etRegisterAddress, etRegisterBirthday;
+    private Button btRegisterSubmit;
+    private Member member;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getActivity() != null) {
-            getActivity().setTitle(R.string.textMemberRegister);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            member = (Member) bundle.getSerializable("member");
         }
     }
 
@@ -38,40 +50,34 @@ public class MemberRegisterFragment extends Fragment {
         return view;
     }
 
+
+
     private void handleViews(View view) {
-        final EditText etRegisterAccount = view.findViewById(R.id.etRegisterAccount);//final原理為，下面內部類要用
-        final EditText etRegisterPassword = view.findViewById(R.id.etRegisterPassword);
-        final EditText etRegisterConfirmPassword = view.findViewById(R.id.etRegisterConfirmPassword);
+        etRegisterAccount = view.findViewById(R.id.etRegisterAccount);
+        etRegisterPassword = view.findViewById(R.id.etRegisterPassword);
+        etRegisterConfirmPassword = view.findViewById(R.id.etRegisterConfirmPassword);
 //        final RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
 //        int radioButtonID = radioGroup.getCheckedRadioButtonId();
 //        final RadioButton radioButton = radioGroup.findViewById(radioButtonID);
-        final EditText etRegisterPhone = view.findViewById(R.id.etRegisterPhone);
-        final EditText etRegisterEmail = view.findViewById(R.id.etRegisterEmail);
-        final EditText etRegisterAddress = view.findViewById(R.id.etRegisterAddress);
-        Button btRegisterSubmit = view.findViewById(R.id.btRegisterSubmit);
+        etRegisterBirthday = view.findViewById(R.id.etRegisterBirthday);
+        etRegisterPhone = view.findViewById(R.id.etRegisterPhone);
+        etRegisterEmail = view.findViewById(R.id.etRegisterEmail);
+        etRegisterAddress = view.findViewById(R.id.etRegisterAddress);
+        btRegisterSubmit = view.findViewById(R.id.btRegisterSubmit);
 
-        Bundle bundle = getArguments();
-        if(bundle != null) {
-            Bundle bundleMemberData = bundle.getBundle("bundleMemberData");
-            Bundle bundleMemberStatus = bundle.getBundle("bundleMemberStatus");
-            if (bundleMemberData != null) {
-                Member member2modify = (Member) bundleMemberData.getSerializable("member2modify");
-                if (member2modify != null) {
-                    etRegisterAccount.setText(member2modify.getMember_account());
-                    etRegisterPassword.setText(member2modify.getMember_password());
-                    etRegisterConfirmPassword.setText(member2modify.getMember_password());
-                    etRegisterPhone.setText(member2modify.getMember_mobile());
-                    etRegisterEmail.setText(member2modify.getMember_email());
-                    etRegisterAddress.setText(member2modify.getMember_address());
-                }
 
-            }
-            if (bundleMemberStatus != null) {
-                if (bundleMemberStatus.getString("modify").equals("modify")) {
-                    btRegisterSubmit.setText(R.string.textModifySubmit);
-                }
+        if (member != null) {
+            etRegisterAccount.setText(member.getMember_account());
+            etRegisterPassword.setText(member.getMember_password());
+            etRegisterConfirmPassword.setText(member.getMember_password());
+            etRegisterPhone.setText(member.getMember_mobile());
+            etRegisterEmail.setText(member.getMember_email());
+            etRegisterAddress.setText(member.getMember_address());
+            if (member.getMember_birthday() != null && member.getMember_birthday().length()>0){
+                etRegisterBirthday.setText(member.getMember_birthday());
             }
         }
+
         btRegisterSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,11 +85,15 @@ public class MemberRegisterFragment extends Fragment {
                 if (!isValid) {
                     return;
                 }
-
+                int id = 0;
+                if(member != null){
+                    id = member.getMember_id();
+                }
                 String account = etRegisterAccount.getText().toString().trim();
                 String password = etRegisterPassword.getText().toString().trim();
                 String confirmPassword = etRegisterConfirmPassword.getText().toString().trim();
 //                String sex = radioButton.getText().toString();
+                String birthday = etRegisterBirthday.getText().toString().trim();
                 String phone = etRegisterPhone.getText().toString().trim();
                 String email = etRegisterEmail.getText().toString().trim();
                 String address = etRegisterAddress.getText().toString().trim();

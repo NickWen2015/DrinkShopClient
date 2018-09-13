@@ -1,6 +1,7 @@
 package drinkshop.cp102.drinkshopclient.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,16 +9,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import drinkshop.cp102.drinkshopclient.Common;
 import drinkshop.cp102.drinkshopclient.R;
 import drinkshop.cp102.drinkshopclient.fragment.MemberFragment;
+import drinkshop.cp102.drinkshopclient.fragment.MemberFunctionMenuFragment;
 import drinkshop.cp102.drinkshopclient.fragment.NewsFragment;
 import drinkshop.cp102.drinkshopclient.fragment.ProductPageFragment;
 import drinkshop.cp102.drinkshopclient.fragment.SettingsFragment;
 import drinkshop.cp102.drinkshopclient.helper.BottomNavigationViewHelper;
+import drinkshop.cp102.drinkshopclient.helper.LogHelper;
 import drinkshop.cp102.drinkshopclient.helper.ShoppingCartDBHelper;
 
 /**
@@ -28,7 +33,7 @@ import drinkshop.cp102.drinkshopclient.helper.ShoppingCartDBHelper;
  */
 public class MainActivity extends AppCompatActivity {
 
-
+    private static final String TAG = "MainActivity";
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
     ShoppingCartDBHelper shoppingCartDBHelper = new ShoppingCartDBHelper(this);  //建立資料庫 避免使用者提前按購物車
 
@@ -49,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 setTitle(R.string.textProduct);
                 return true;
             case R.id.item_Member:  //會員中心
-                fragment = new MemberFragment();
+                if (getLoginStatus()){
+                    fragment = new MemberFunctionMenuFragment();
+                }else{
+                    fragment = new MemberFragment();
+                }
                 changeFragment(fragment);
                 setTitle(R.string.textMember);
                 return true;
@@ -72,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.productpage_menu, menu);
+        MenuItem item = menu.findItem(R.id.logout);
+        if (getLoginStatus() == false){//判斷是否已登入,若未登入則不會出現登出按鈕
+            item.setVisible(false);
+        }else{
+            item.setVisible(true);
+        }
+
         return true;
     }
 
@@ -82,6 +98,21 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentGoToShoppingCartActivity = new Intent(this, ShoppingCartActivity.class);
                 startActivity(intentGoToShoppingCartActivity);
                 break;
+            case R.id.logout:
+                setTitle(R.string.textNotLogin);
+                SharedPreferences preference = getSharedPreferences("preference", MODE_PRIVATE);
+                boolean login = preference.getBoolean("login", false);
+                preference.edit().putBoolean("login", false).apply();//將偏好設定檔改為為登出
+                preference.edit().putInt("member_id", 0).apply();
+                preference.edit().putString("member_account", "").apply();
+                preference.edit().putString("member_name", "").apply();
+                Common.showToast(this, R.string.textLogout);
+                item.setVisible(false);
+                Fragment fragment = new MemberFragment();
+                changeFragment(fragment);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
         return true;
     }
@@ -125,5 +156,12 @@ public class MainActivity extends AppCompatActivity {
         if (fragment != null && fragment instanceof ProductPageFragment) {
             ((ProductPageFragment)fragment).updateRecyclerView();
         }
+    }
+
+    public boolean getLoginStatus() {
+        SharedPreferences pref = getSharedPreferences("preference", MODE_PRIVATE);
+        boolean login = pref.getBoolean("login", false);
+        Log.d(TAG, "loginStatus = " + login);
+        return login;
     }
 }

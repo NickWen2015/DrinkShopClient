@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_view_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:textSize="25dp"
+        android:text="歷史購買紀錄"
+        android:textColor="@color/colorBlack"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/order_details"
+                android:layout_marginLeft="250dp"
+                android:layout_marginTop="45dp"
+                android:background="@color/colorMemberCoupon"/>
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="6dp"
+                android:text="訂單編號:"
+                android:textSize="20dp"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/tvNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6dp"
+                android:layout_toRightOf="@id/tvName"
+                android:textSize="20dp"
+                android:text="12345"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/tvName"
+                android:textSize="18dp"
+                android:text="訂購日期:"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/tvDateNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tvDate"
+                android:layout_below="@+id/tvName"
+                android:textSize="18dp"
+                android:text="2018-09-10"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/tvDate"
+                android:textSize="18dp"
+                android:text="訂購數量:"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/tvQuantityDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tvQuantity"
+                android:layout_below="@+id/tvDateNumber"
+                android:textSize="18dp"
+                android:text="5杯"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/tvQuantity"
+                android:textSize="18dp"
+                android:text="總金額:"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/tvtvQuantityDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tvPrice"
+                android:layout_below="@+id/tvQuantityDetail"
+                android:textSize="18dp"
+                android:text="300元"
+                android:textColor="@color/colorBlack"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
+

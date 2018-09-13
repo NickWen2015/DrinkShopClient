@@ -12,8 +12,11 @@
     <string name="textMemberHint">請輸入帳號</string>
     <string name="textPasswordHint">請輸入密碼</string>
     <string name="textConfirmPasswordHint">請再次輸入確認密碼</string>
+    <string name="textRegisterBirthday">請輸入生日</string>
     <string name="textMemberLogin">會員登入</string>
-    <string name="textMemberRegister">會員註冊</string>
+    <string name="textMemberRegister">會員中心</string>
+    <string name="textMemberCoupon">優惠卷管理</string>
+    <string name="textMemberHistory">歷史購買紀錄</string>
     <string name="textMemberFunctionMenu">會員功能</string>
     <string name="textSubmit">確認送出</string>
     <string name="textModifySubmit">確認修改</string>
@@ -28,13 +31,19 @@
     <string name="textMemberMenuOrderStatus">查詢訂單狀況</string>
     <string name="textMemberMenuCoupon">優惠卷管理</string>
     <string name="textLoginSuccess">登入成功</string>
+    <string name="textLogout">登出</string>
+    <string name="textNotLogin">未登入</string>
     <!--會員中心 end-->
 
 
     <!--error start-->
     <string name="textRegisterConfirmPasswordError">密碼輸入與第一次不相同,請重新輸入</string>
     <string name="textLoginError">登入失敗，請確認輸入的帳密是否正確</string>
+    <string name="msg_InvalidUserOrPassword">登入失敗，請確認輸入的帳密是否正確</string>
+    <string name="msg_NoNetwork">沒有可用的網絡連接</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--error end-->
 </resources>

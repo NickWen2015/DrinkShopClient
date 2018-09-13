@@ -3,6 +3,11 @@ package drinkshop.cp102.drinkshopclient.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 會員
+ * @author Nick
+ * @date 2018/9/1
+ * */
 public class Member implements Serializable{
     private int member_id;
     private String member_account;
