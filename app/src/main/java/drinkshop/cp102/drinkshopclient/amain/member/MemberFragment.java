@@ -3,6 +3,7 @@ package drinkshop.cp102.drinkshopclient.amain.member;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,10 +15,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 import drinkshop.cp102.drinkshopclient.Common;
 import drinkshop.cp102.drinkshopclient.R;
@@ -34,14 +31,13 @@ import static android.content.Context.MODE_PRIVATE;
 public class MemberFragment extends Fragment {
     private static final String TAG = "MemberFragment";
     private MyTask loginTask, memberTask;
+    private FragmentActivity fragmentActivity;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getActivity() != null) {
-            getActivity().setTitle(R.string.textMemberRegister);
-        }
+        fragmentActivity = getActivity();
     }
 
     @Override
@@ -89,6 +85,7 @@ public class MemberFragment extends Fragment {
                     setLoginStatus();
                     Member member = getMemberData(account, password);
                     setLoginInfo(member.getMember_id(), member.getMember_account(), member.getMember_name());
+
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("member", member);
                     Toast.makeText(getActivity(), R.string.textLoginSuccess, Toast.LENGTH_SHORT).show();
@@ -110,6 +107,8 @@ public class MemberFragment extends Fragment {
 
             }
         });
+
+
     }
 
     private Member getMemberData(String account, String password) {

@@ -1,21 +1,22 @@
 package drinkshop.cp102.drinkshopclient.amain.member;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -26,8 +27,6 @@ import drinkshop.cp102.drinkshopclient.R;
 import drinkshop.cp102.drinkshopclient.bean.Member;
 import drinkshop.cp102.drinkshopclient.task.MyTask;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -38,30 +37,33 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class MemberFunctionMenuFragment extends Fragment {
 
-    private FragmentActivity activity;
+    private static final String TAG = "MemberFMFragment";
+    private FragmentActivity fragmentActivity;
     private TextView txt_username;
     private static final int REQ_LOGIN = 2;
     private Member member;
     private boolean login;
     private SharedPreferences preferences;
-    private MyTask memberTask;;
-    private ImageView ivTakePicture;
-    private Button btLogout;
+    private MyTask memberTask;
+    private FragmentManager fragmentManager;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
+        setHasOptionsMenu(true);
+        fragmentActivity = getActivity();
         preferences = getActivity().getSharedPreferences("preference", MODE_PRIVATE);
         login = preferences.getBoolean("login", false);
 
     Bundle bundle = getArguments();
-        if (bundle != null){//登入帶資料過來
+        if (bundle != null){//登入帶資料過來或註冊成功跳轉頁面過來
             member = (Member)bundle.getSerializable("member");
         }else{//已經登入直接取資料
             int member_id = preferences.getInt("member_id", 0);
             member = getMemberData(member_id);
         }
+        fragmentManager = getFragmentManager();
 
     }
 
@@ -117,6 +119,14 @@ public class MemberFunctionMenuFragment extends Fragment {
 
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+
     /**
      * 會員功能按鈕監聽器,監聽按哪個功能
      **/
@@ -131,10 +141,11 @@ public class MemberFunctionMenuFragment extends Fragment {
                     bundle.putSerializable("member", member);
                     MemberRegisterFragment memberRegisterFragment = new MemberRegisterFragment();
                     memberRegisterFragment.setArguments(bundle);
-                    FragmentTransaction transactionModify = getFragmentManager().beginTransaction();
-                    transactionModify.replace(R.id.content, memberRegisterFragment, "fragmentMemberRegisterModify");
-                    transactionModify.addToBackStack("fragmentMemberRegisterModify");
-                    transactionModify.commit();
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction().
+                                replace(R.id.content, memberRegisterFragment).addToBackStack(null).commit();
+                    }
+
                     break;
                 case R.id.cvMemberHistory://訂單歷史紀錄
 
@@ -161,53 +172,20 @@ public class MemberFunctionMenuFragment extends Fragment {
         }
     };
 
-    @Override
-//只要拍完照onActivityResult會被呼叫,回來會呼叫callback method,監聽方法,系統偵測到會自動呼叫,有被請求回來才會自動call,onStart是只要返回就會呼叫
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                // 也可取得自行設計登入畫面的帳號密碼
-                case REQ_LOGIN:
-                    SharedPreferences pref = activity.getSharedPreferences(Common.PREF_FILE,
-                            MODE_PRIVATE);//取偏好設定
-                    if (networkConnected()) {
-//                        String url = Common.URL + "/DataUploadServlet";
-//                        String name = pref.getString("user", "");//取不到值預設空字串
-                        //byte[] image = Common.bitmapToPNG(picture);//拿記憶體的圖或儲存體的皆可
-//                        JsonObject jsonObject = new JsonObject();
-//                        jsonObject.addProperty("name", name);
-//                        jsonObject.addProperty("imageBase64", Base64.encodeToString(image, Base64.DEFAULT));
-                        //dataUploadTask = new MyTask(url, jsonObject.toString());
-                        try {
-//                            String jsonIn = dataUploadTask.execute().get();
-//                            JsonObject jObject = new Gson().fromJson(jsonIn, JsonObject.class);
-//                            name = jObject.get("name").getAsString();
-//                            image = Base64.decode(jObject.get("imageBase64").getAsString(), Base64.DEFAULT);
-//                            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);//從0讀到總長度
-//
-//                            TextView tvResultUser = findViewById(R.id.tvResultUser);
-//                            ImageView ivResultImage = findViewById(R.id.ivResponseImage);
-//                            String text = "name: " + name;
-//                            tvResultUser.setText(text);
-//                            ivResultImage.setImageBitmap(bitmap);
-                        } catch (Exception e) {
-                            Log.e(TAG, e.toString());
-                        }
-                    } else {
-                        Common.showToast(activity, R.string.msg_NoNetwork);
-                    }
-                    break;
-            }
-        }
-    }
 
     //檢查裝置是否連網
-    private boolean networkConnected() {
+    private boolean networkConnected(Activity activity) {
         ConnectivityManager conManager =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = conManager != null ? conManager.getActiveNetworkInfo() : null;
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    public boolean getLoginStatus() {
+        SharedPreferences preference = getActivity().getSharedPreferences("preference", MODE_PRIVATE);
+        boolean login = preference.getBoolean("login", false);
+        Log.d(TAG, "loginStatus = " + login);
+        return login;
     }
 
     @Override

@@ -14,6 +14,7 @@ public class Member implements Serializable{
     private String member_password;
     private String member_name;
     private String member_birthday;
+    private String member_sex;
     private String member_mobile;
     private String member_email;
     private String member_address;
@@ -24,17 +25,51 @@ public class Member implements Serializable{
         super();
     }
 
-    public Member(int member_id, String member_account, String member_password, String member_name, String member_birthday, String member_mobile, String member_email, String member_address, String member_status) {
+    public Member(String member_account, String member_password, String member_name, String member_birthday, String member_sex, String member_mobile, String member_email, String member_address) {
+        this.member_account = member_account;
+        this.member_password = member_password;
+        this.member_name = member_name;
+        this.member_birthday = member_birthday;
+        this.member_sex = member_sex;
+        this.member_mobile = member_mobile;
+        this.member_email = member_email;
+        this.member_address = member_address;
+    }
+
+    public Member(int member_id, String member_password, String member_name, String member_birthday, String member_sex, String member_mobile, String member_email, String member_address) {
+
+        this.member_id = member_id;
+        this.member_password = member_password;
+        this.member_name = member_name;
+        this.member_birthday = member_birthday;
+        this.member_sex = member_sex;
+        this.member_mobile = member_mobile;
+        this.member_email = member_email;
+        this.member_address = member_address;
+    }
+
+    public Member(int member_id, String member_account, String member_password, String member_name, String member_birthday, String member_sex, String member_mobile, String member_email, String member_address, String member_status) {
         this.member_id = member_id;
         this.member_account = member_account;
         this.member_password = member_password;
         this.member_name = member_name;
         this.member_birthday = member_birthday;
+        this.member_sex = member_sex;
         this.member_mobile = member_mobile;
         this.member_email = member_email;
         this.member_address = member_address;
         this.member_status = member_status;
     }
+
+    public String getMember_sex() {
+        return member_sex;
+    }
+
+    public void setMember_sex(String member_sex) {
+        this.member_sex = member_sex;
+    }
+
+
 
     public int getMember_id() {
         return member_id;

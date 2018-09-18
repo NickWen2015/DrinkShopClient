@@ -1,6 +1,7 @@
 package drinkshop.cp102.drinkshopclient.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 訂單主檔
@@ -8,40 +9,75 @@ import java.io.Serializable;
  * @date 2018/9/3
  */
 public class Order implements Serializable {
-    private String order_id;
-    private String store_name;
+    private int order_id;
+    private String invoice_prefix;
+    private String invoice_no;
+    private String store_id;
+    private String member_id;
     private String order_accept_time;
+    private String order_finish_time;
     private String order_type;
-    private String coupon_discount;
+    private String delivery_id;
+    private String coupon_id;
     private String order_status;
+    private List<OrderDetail> orderDetailList;
 
     public Order() {
         super();
     }
 
-    public Order(String order_id, String store_name, String order_accept_time, String order_type, String coupon_discount, String order_status) {
+    public Order(int order_id, String invoice_prefix, String invoice_no, String store_id, String member_id, String order_accept_time, String order_finish_time, String order_type, String delivery_id, String coupon_id, String order_status) {
         this.order_id = order_id;
-        this.store_name = store_name;
+        this.invoice_prefix = invoice_prefix;
+        this.invoice_no = invoice_no;
+        this.store_id = store_id;
+        this.member_id = member_id;
         this.order_accept_time = order_accept_time;
+        this.order_finish_time = order_finish_time;
         this.order_type = order_type;
-        this.coupon_discount = coupon_discount;
+        this.delivery_id = delivery_id;
+        this.coupon_id = coupon_id;
         this.order_status = order_status;
     }
 
-    public String getOrder_id() {
+    public int getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(String order_id) {
+    public void setOrder_id(int order_id) {
         this.order_id = order_id;
     }
 
-    public String getStore_name() {
-        return store_name;
+    public String getInvoice_prefix() {
+        return invoice_prefix;
     }
 
-    public void setStore_name(String store_name) {
-        this.store_name = store_name;
+    public void setInvoice_prefix(String invoice_prefix) {
+        this.invoice_prefix = invoice_prefix;
+    }
+
+    public String getInvoice_no() {
+        return invoice_no;
+    }
+
+    public void setInvoice_no(String invoice_no) {
+        this.invoice_no = invoice_no;
+    }
+
+    public String getStore_id() {
+        return store_id;
+    }
+
+    public void setStore_id(String store_id) {
+        this.store_id = store_id;
+    }
+
+    public String getMember_id() {
+        return member_id;
+    }
+
+    public void setMember_id(String member_id) {
+        this.member_id = member_id;
     }
 
     public String getOrder_accept_time() {
@@ -52,6 +88,14 @@ public class Order implements Serializable {
         this.order_accept_time = order_accept_time;
     }
 
+    public String getOrder_finish_time() {
+        return order_finish_time;
+    }
+
+    public void setOrder_finish_time(String order_finish_time) {
+        this.order_finish_time = order_finish_time;
+    }
+
     public String getOrder_type() {
         return order_type;
     }
@@ -60,12 +104,20 @@ public class Order implements Serializable {
         this.order_type = order_type;
     }
 
-    public String getCoupon_discount() {
-        return coupon_discount;
+    public String getDelivery_id() {
+        return delivery_id;
     }
 
-    public void setCoupon_discount(String coupon_discount) {
-        this.coupon_discount = coupon_discount;
+    public void setDelivery_id(String delivery_id) {
+        this.delivery_id = delivery_id;
+    }
+
+    public String getCoupon_id() {
+        return coupon_id;
+    }
+
+    public void setCoupon_id(String coupon_id) {
+        this.coupon_id = coupon_id;
     }
 
     public String getOrder_status() {
@@ -74,5 +126,13 @@ public class Order implements Serializable {
 
     public void setOrder_status(String order_status) {
         this.order_status = order_status;
+    }
+
+    public List<OrderDetail> getOrderDetailList() {
+        return orderDetailList;
+    }
+
+    public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+        this.orderDetailList = orderDetailList;
     }
 }

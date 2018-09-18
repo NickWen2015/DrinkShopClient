@@ -14,7 +14,7 @@
     <string name="textConfirmPasswordHint">請再次輸入確認密碼</string>
     <string name="textRegisterBirthday">請輸入生日</string>
     <string name="textMemberLogin">會員登入</string>
-    <string name="textMemberRegister">會員中心</string>
+    <string name="textMemberRegister">會員註冊</string>
     <string name="textMemberCoupon">優惠卷管理</string>
     <string name="textMemberHistory">歷史購買紀錄</string>
     <string name="textMemberFunctionMenu">會員功能</string>
@@ -33,7 +33,16 @@
     <string name="textLoginSuccess">登入成功</string>
     <string name="textLogout">登出</string>
     <string name="textNotLogin">未登入</string>
+    <string name="textMemberNameHint">請輸入姓名</string>
+    <string name="msg_UpdateSuccess">修改成功</string>
+    <string name="msg_UpdateFail">修改失敗</string>
+    <string name="msg_InsertSuccess">新增成功</string>
+    <string name="msg_InsertFail">新增失敗</string>
     <!--會員中心 end-->
+    <!--facebook login start-->
+    <string name="facebook_app_id">296322341094103</string>
+    <string name="fb_login_protocol_scheme">fb296322341094103</string>
+    <!--facebook login  end-->
 
 
     <!--error start-->
@@ -44,9 +53,11 @@
     <string name="msg_NoProductsFound">No Products Found</string>
     <string name="text_AddingProductToShoppingCard">加入購物車</string>
     <string name="text_EditProductToShoppingCart">修改完成</string>
+    <!--error end-->
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_facebook">FacebookActivity</string>
 
-    <!--error end-->
+
 </resources>

@@ -33,6 +33,8 @@ import drinkshop.cp102.drinkshopclient.helper.ShoppingCartDBHelper;
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    public Menu menuLogin;
+    public MenuItem menuitemLogin;
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
     ShoppingCartDBHelper shoppingCartDBHelper = new ShoppingCartDBHelper(this);  //建立資料庫 避免使用者提前按購物車
@@ -84,10 +86,11 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.productpage_menu, menu);
         MenuItem item = menu.findItem(R.id.logout);
-        if (getLoginStatus() == false) {//判斷是否已登入,若未登入則不會出現登出按鈕
-            item.setVisible(false);
-        } else {
+
+        if (getLoginStatus()) {//判斷是否已登入,若未登入則不會出現登出按鈕
             item.setVisible(true);
+        } else {
+            item.setVisible(false);
         }
 
         return true;
@@ -153,25 +156,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-//    /**
-//     * 當此頁轉頁至別頁並返回後執行
-//     * */
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        switch (requestCode) {
-//            case MainActivityConstant.PRODUCT_PAGE:  //轉頁在ProductAdapter
-//                fragment = fragmentManager.findFragmentById(R.id.content);
-//                if (fragment != null && fragment instanceof ProductPageFragment) {
-//                    ((ProductPageFragment) fragment).updateRecyclerView();
-//                }
-//                break;
-//            case MainActivityConstant.SHOPPING_CART:  //轉頁在ProductAdapter
-//
-//                break;
-//        }
-//    }
-
     /**
      * 返回頁面執行
      */
@@ -192,4 +176,5 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "loginStatus = " + login);
         return login;
     }
+
 }
