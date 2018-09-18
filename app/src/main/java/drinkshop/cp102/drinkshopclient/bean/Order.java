@@ -12,13 +12,13 @@ public class Order implements Serializable {
     private int order_id;
     private String invoice_prefix;
     private String invoice_no;
-    private String store_id;
-    private String member_id;
+    private int store_id;
+    private int member_id;
     private String order_accept_time;
     private String order_finish_time;
     private String order_type;
-    private String delivery_id;
-    private String coupon_id;
+    private int delivery_id;
+    private int coupon_id;
     private String order_status;
     private List<OrderDetail> orderDetailList;
 
@@ -26,7 +26,7 @@ public class Order implements Serializable {
         super();
     }
 
-    public Order(int order_id, String invoice_prefix, String invoice_no, String store_id, String member_id, String order_accept_time, String order_finish_time, String order_type, String delivery_id, String coupon_id, String order_status) {
+    public Order(int order_id, String invoice_prefix, String invoice_no, int store_id, int member_id, String order_accept_time, String order_finish_time, String order_type, int delivery_id, int coupon_id, String order_status, List<OrderDetail> orderDetailList) {
         this.order_id = order_id;
         this.invoice_prefix = invoice_prefix;
         this.invoice_no = invoice_no;
@@ -38,6 +38,7 @@ public class Order implements Serializable {
         this.delivery_id = delivery_id;
         this.coupon_id = coupon_id;
         this.order_status = order_status;
+        this.orderDetailList = orderDetailList;
     }
 
     public int getOrder_id() {
@@ -64,19 +65,19 @@ public class Order implements Serializable {
         this.invoice_no = invoice_no;
     }
 
-    public String getStore_id() {
+    public int getStore_id() {
         return store_id;
     }
 
-    public void setStore_id(String store_id) {
+    public void setStore_id(int store_id) {
         this.store_id = store_id;
     }
 
-    public String getMember_id() {
+    public int getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+    public void setMember_id(int member_id) {
         this.member_id = member_id;
     }
 
@@ -104,19 +105,19 @@ public class Order implements Serializable {
         this.order_type = order_type;
     }
 
-    public String getDelivery_id() {
+    public int getDelivery_id() {
         return delivery_id;
     }
 
-    public void setDelivery_id(String delivery_id) {
+    public void setDelivery_id(int delivery_id) {
         this.delivery_id = delivery_id;
     }
 
-    public String getCoupon_id() {
+    public int getCoupon_id() {
         return coupon_id;
     }
 
-    public void setCoupon_id(String coupon_id) {
+    public void setCoupon_id(int coupon_id) {
         this.coupon_id = coupon_id;
     }
 

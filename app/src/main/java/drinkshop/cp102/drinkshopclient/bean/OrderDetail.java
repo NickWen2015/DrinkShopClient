@@ -9,19 +9,23 @@ import java.io.Serializable;
  * @date 2018/9/1
  */
 public class OrderDetail implements Serializable {
-    private String order_detail_id;
-    private String order_id;
+    private int order_detail_id;
+    private int order_id;
+    private int product_id;
+    private int size_id;
+    private int sugar_id;
+    private int ice_id;
+    private int product_quantity;
     private String product_name;
     private String ice_name;
     private String sugar_name;
     private String size_name;
-    private String product_quantity;
 
     public OrderDetail() {
         super();
     }
 
-    public OrderDetail(String order_detail_id, String order_id, String product_name, String ice_name, String sugar_name, String size_name, String product_quantity) {
+    public OrderDetail(int order_detail_id, int order_id, String product_name, String ice_name, String sugar_name, String size_name, int product_quantity) {
         this.order_detail_id = order_detail_id;
         this.order_id = order_id;
         this.product_name = product_name;
@@ -31,20 +35,60 @@ public class OrderDetail implements Serializable {
         this.product_quantity = product_quantity;
     }
 
-    public String getOrder_detail_id() {
+    public int getOrder_detail_id() {
         return order_detail_id;
     }
 
-    public void setOrder_detail_id(String order_detail_id) {
+    public void setOrder_detail_id(int order_detail_id) {
         this.order_detail_id = order_detail_id;
     }
 
-    public String getOrder_id() {
+    public int getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(String order_id) {
+    public void setOrder_id(int order_id) {
         this.order_id = order_id;
+    }
+
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
+    }
+
+    public int getSize_id() {
+        return size_id;
+    }
+
+    public void setSize_id(int size_id) {
+        this.size_id = size_id;
+    }
+
+    public int getSugar_id() {
+        return sugar_id;
+    }
+
+    public void setSugar_id(int sugar_id) {
+        this.sugar_id = sugar_id;
+    }
+
+    public int getIce_id() {
+        return ice_id;
+    }
+
+    public void setIce_id(int ice_id) {
+        this.ice_id = ice_id;
+    }
+
+    public int getProduct_quantity() {
+        return product_quantity;
+    }
+
+    public void setProduct_quantity(int product_quantity) {
+        this.product_quantity = product_quantity;
     }
 
     public String getProduct_name() {
@@ -77,13 +121,5 @@ public class OrderDetail implements Serializable {
 
     public void setSize_name(String size_name) {
         this.size_name = size_name;
-    }
-
-    public String getProduct_quantity() {
-        return product_quantity;
-    }
-
-    public void setProduct_quantity(String product_quantity) {
-        this.product_quantity = product_quantity;
     }
 }
