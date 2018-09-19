@@ -20,19 +20,37 @@ public class OrderDetail implements Serializable {
     private String ice_name;
     private String sugar_name;
     private String size_name;
+    private int product_price;
 
     public OrderDetail() {
         super();
     }
 
-    public OrderDetail(int order_detail_id, int order_id, String product_name, String ice_name, String sugar_name, String size_name, int product_quantity) {
+    public OrderDetail(int order_detail_id, int order_id, int product_id, int size_id, int sugar_id, int ice_id,
+                       int product_quantity, String product_name, String ice_name, String sugar_name, String size_name, int product_price) {
+        super();
         this.order_detail_id = order_detail_id;
+        this.order_id = order_id;
+        this.product_id = product_id;
+        this.size_id = size_id;
+        this.sugar_id = sugar_id;
+        this.ice_id = ice_id;
+        this.product_quantity = product_quantity;
+        this.product_name = product_name;
+        this.ice_name = ice_name;
+        this.sugar_name = sugar_name;
+        this.size_name = size_name;
+        this.product_price = product_price;
+    }
+
+    public OrderDetail(int order_id, String product_name, String ice_name, String sugar_name, String size_name, int product_quantity, int product_price) {
         this.order_id = order_id;
         this.product_name = product_name;
         this.ice_name = ice_name;
         this.sugar_name = sugar_name;
         this.size_name = size_name;
         this.product_quantity = product_quantity;
+        this.product_price = product_price;
     }
 
     public int getOrder_detail_id() {
@@ -121,5 +139,13 @@ public class OrderDetail implements Serializable {
 
     public void setSize_name(String size_name) {
         this.size_name = size_name;
+    }
+
+    public int getProduct_price() {
+        return product_price;
+    }
+
+    public void setProduct_price(int product_price) {
+        this.product_price = product_price;
     }
 }
