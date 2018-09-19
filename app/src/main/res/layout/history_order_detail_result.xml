@@ -44,7 +44,7 @@
                     android:textColor="@color/colorBlack"/>
 
                 <TextView
-                    android:id="@+id/tvNumber"
+                    android:id="@+id/tvOrderId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -94,7 +94,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="13dp"
                     android:layout_toRightOf="@id/tvIce"
-                    android:layout_below="@+id/tvNumber"
+                    android:layout_below="@+id/tvOrderId"
                     android:textSize="18dp"
                     android:text="L"
                     android:textColor="@color/colorBlack"/>
@@ -106,7 +106,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/tvSize"
-                    android:layout_below="@+id/tvNumber"
+                    android:layout_below="@+id/tvOrderId"
                     android:textSize="18dp"
                     android:text="50元"
                     android:textColor="@color/colorBlack"/>
@@ -118,7 +118,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/tvPrices"
-                    android:layout_below="@+id/tvNumber"
+                    android:layout_below="@+id/tvOrderId"
                     android:textSize="18dp"
                     android:text="2杯"
                     android:textColor="@color/colorBlack"/>
@@ -130,7 +130,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="45dp"
                     android:layout_toRightOf="@id/tvPrices"
-                    android:layout_below="@+id/tvNumber"
+                    android:layout_below="@+id/tvOrderId"
                     android:textSize="18dp"
                     android:text="100元"
                     android:textColor="@color/colorBlack"/>

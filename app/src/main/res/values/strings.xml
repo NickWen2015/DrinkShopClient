@@ -51,6 +51,7 @@
     <string name="msg_InvalidUserOrPassword">登入失敗，請確認輸入的帳密是否正確</string>
     <string name="msg_NoNetwork">沒有可用的網絡連接</string>
     <string name="msg_NoProductsFound">No Products Found</string>
+    <string name="msg_NoOrdersFound">沒有任何訂單記錄</string>
     <string name="text_AddingProductToShoppingCard">加入購物車</string>
     <string name="text_EditProductToShoppingCart">修改完成</string>
     <!--error end-->

@@ -29,6 +29,7 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/ibOrderDetial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/order_details"
@@ -37,7 +38,7 @@
                 android:background="@color/colorMemberCoupon"/>
 
             <TextView
-                android:id="@+id/tvName"
+                android:id="@+id/tvOrderIdTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
@@ -47,81 +48,81 @@
                 android:textColor="@color/colorBlack"/>
 
             <TextView
-                android:id="@+id/tvNumber"
+                android:id="@+id/tvOrderId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="6dp"
-                android:layout_toRightOf="@id/tvName"
+                android:layout_toRightOf="@id/tvOrderIdTitle"
                 android:textSize="20dp"
                 android:text="12345"
                 android:textColor="@color/colorBlack"/>
 
             <TextView
-                android:id="@+id/tvDate"
+                android:id="@+id/tvOrderAcceptTimeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/tvName"
+                android:layout_below="@+id/tvOrderIdTitle"
                 android:textSize="18dp"
                 android:text="訂購日期:"
                 android:textColor="@color/colorBlack"/>
 
             <TextView
-                android:id="@+id/tvDateNumber"
+                android:id="@+id/tvOrderAcceptTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/tvDate"
-                android:layout_below="@+id/tvName"
+                android:layout_toRightOf="@id/tvOrderAcceptTimeTitle"
+                android:layout_below="@+id/tvOrderIdTitle"
                 android:textSize="18dp"
                 android:text="2018-09-10"
                 android:textColor="@color/colorBlack"/>
 
             <TextView
-                android:id="@+id/tvQuantity"
+                android:id="@+id/tvOrderQuantityTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/tvDate"
+                android:layout_below="@+id/tvOrderAcceptTimeTitle"
                 android:textSize="18dp"
                 android:text="訂購數量:"
                 android:textColor="@color/colorBlack"/>
 
             <TextView
-                android:id="@+id/tvQuantityDetail"
+                android:id="@+id/tvOrderQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/tvQuantity"
-                android:layout_below="@+id/tvDateNumber"
+                android:layout_toRightOf="@id/tvOrderQuantityTitle"
+                android:layout_below="@+id/tvOrderAcceptTime"
                 android:textSize="18dp"
                 android:text="5杯"
                 android:textColor="@color/colorBlack"/>
 
             <TextView
-                android:id="@+id/tvPrice"
+                android:id="@+id/tvOrderPriceTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/tvQuantity"
+                android:layout_below="@+id/tvOrderQuantityTitle"
                 android:textSize="18dp"
                 android:text="總金額:"
                 android:textColor="@color/colorBlack"/>
 
             <TextView
-                android:id="@+id/tvtvQuantityDetail"
+                android:id="@+id/tvOrderPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/tvPrice"
-                android:layout_below="@+id/tvQuantityDetail"
+                android:layout_toRightOf="@id/tvOrderPriceTitle"
+                android:layout_below="@+id/tvOrderQuantity"
                 android:textSize="18dp"
                 android:text="300元"
                 android:textColor="@color/colorBlack"/>

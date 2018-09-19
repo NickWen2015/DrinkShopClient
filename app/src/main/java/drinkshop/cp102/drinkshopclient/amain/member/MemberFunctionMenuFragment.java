@@ -53,7 +53,7 @@ public class MemberFunctionMenuFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         fragmentActivity = getActivity();
-        preferences = getActivity().getSharedPreferences("preference", MODE_PRIVATE);
+        preferences = fragmentActivity.getSharedPreferences("preference", MODE_PRIVATE);
         login = preferences.getBoolean("login", false);
 
     Bundle bundle = getArguments();
@@ -116,7 +116,7 @@ public class MemberFunctionMenuFragment extends Fragment {
 
         cvMemberModify.setOnClickListener(listener);
         cvMemberCoupon.setOnClickListener(listener);
-
+        cvMemberHistory.setOnClickListener(listener);
     }
 
     @Override
@@ -133,11 +133,12 @@ public class MemberFunctionMenuFragment extends Fragment {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Bundle bundle = null;
             int id = v.getId();
             switch (id) {
                 case R.id.cvMemberModify://會員資料修改
 
-                    Bundle bundle = new Bundle();
+                    bundle = new Bundle();
                     bundle.putSerializable("member", member);
                     MemberRegisterFragment memberRegisterFragment = new MemberRegisterFragment();
                     memberRegisterFragment.setArguments(bundle);
@@ -148,12 +149,15 @@ public class MemberFunctionMenuFragment extends Fragment {
 
                     break;
                 case R.id.cvMemberHistory://訂單歷史紀錄
-
+                    bundle = new Bundle();
+                    bundle.putSerializable("member", member);
                     MemberHistoryFragment memberHistoryFragment = new MemberHistoryFragment();
-                    FragmentTransaction transactionHistory = getFragmentManager().beginTransaction();
-                    transactionHistory.replace(R.id.content, memberHistoryFragment, "fragmentMemberHistory");
-                    transactionHistory.addToBackStack("fragmentMemberHistory");
-                    transactionHistory.commit();
+                    memberHistoryFragment.setArguments(bundle);
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction().
+                                replace(R.id.content, memberHistoryFragment).addToBackStack(null).commit();
+                    }
+
                     break;
                 case R.id.cvMemberOrderStatus://訂單狀態查詢
 
@@ -182,7 +186,7 @@ public class MemberFunctionMenuFragment extends Fragment {
     }
 
     public boolean getLoginStatus() {
-        SharedPreferences preference = getActivity().getSharedPreferences("preference", MODE_PRIVATE);
+        SharedPreferences preference = fragmentActivity.getSharedPreferences("preference", MODE_PRIVATE);
         boolean login = preference.getBoolean("login", false);
         Log.d(TAG, "loginStatus = " + login);
         return login;
@@ -191,9 +195,7 @@ public class MemberFunctionMenuFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (memberTask != null) {
-            memberTask.cancel(true);
-        }
+        Common.closeAsyncTask(memberTask);
     }
 
 }

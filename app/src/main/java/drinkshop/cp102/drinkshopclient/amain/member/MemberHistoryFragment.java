@@ -1,37 +1,65 @@
 package drinkshop.cp102.drinkshopclient.amain.member;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.List;
 
+import drinkshop.cp102.drinkshopclient.Common;
 import drinkshop.cp102.drinkshopclient.R;
-import drinkshop.cp102.drinkshopclient.bean.Coupon;
+import drinkshop.cp102.drinkshopclient.bean.Member;
+import drinkshop.cp102.drinkshopclient.bean.Order;
+import drinkshop.cp102.drinkshopclient.bean.OrderDetail;
+import drinkshop.cp102.drinkshopclient.task.MyTask;
 
 /**
  * 歷史購買紀錄頁
+ *
  * @author Nick
  * @date 2018/9/1
  */
 public class MemberHistoryFragment extends Fragment {
+    private SharedPreferences preferences;
+    private static final String TAG = "MemberHFragment";
+    private FragmentActivity fragmentActivity;
+    private MyTask orderHistoryTask;
+    private Member member;
+    private int member_id = 0;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getActivity() != null) {
-            getActivity().setTitle(R.string.textMemberHistory);
+
+        fragmentActivity = getActivity();
+        if (fragmentActivity != null) {
+            fragmentActivity.setTitle(R.string.textMemberHistory);
+
+        }
+        Bundle bundle = getArguments();
+
+        if (bundle != null) {//登入帶資料過來或註冊成功跳轉頁面過來
+            member = (Member) bundle.getSerializable("member");
+            member_id = member.getMember_id();
+        } else {//已經登入直接取資料
+            member_id = preferences.getInt("member_id", 0);
         }
     }
 
@@ -47,32 +75,35 @@ public class MemberHistoryFragment extends Fragment {
     private void handleViews(View view) {
         final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//建一個線性佈局管理器，將context資源傳入
-        recyclerView.setAdapter(new CouponAapter(getCoupons(), getContext()));//必須為RecyclerView.Adapter內部類別的子類別，先做
+        recyclerView.setAdapter(new OrderAapter(getOrders(member_id), getContext()));//必須為RecyclerView.Adapter內部類別的子類別，先做
     }
-    private class CouponAapter extends RecyclerView.Adapter {
+
+    private class OrderAapter extends RecyclerView.Adapter {
         //變數等等要給下面使用
-        List<Coupon> Coupons;
+        List<Order> orders;
         Context context;
 
-        public CouponAapter(List<Coupon> Coupons, Context context) {//建構式
-            this.Coupons = Coupons;
+        public OrderAapter(List<Order> orders, Context context) {//建構式
+            this.orders = orders;
             this.context = context;
         }
 
         @Override
         public int getItemCount() {//旅遊景點有幾個資料
-            return Coupons.size();
+            return orders.size();
         }
 
         private class MyViewHolder extends RecyclerView.ViewHolder {//建造一個類別hold住三個資源
-            ImageView ivCouponPic;
-            TextView tvCouponDate, tvCouponStatus;
+            ImageButton ibOrderDetial;
+            TextView tvOrderId, tvOrderAcceptTime, tvOrderQuantity, tvOrderPrice;
 
             public MyViewHolder(View item_view) {//未來會有三個ViewHolder
                 super(item_view);//呼叫父類別的建構式，並設定父類item_view
-                ivCouponPic = item_view.findViewById(R.id.ivCoupon_pic);//要寫物件item_view.findViewById，否則會找activity_main
-                tvCouponDate = item_view.findViewById(R.id.tvCoupon_date);
-                tvCouponStatus = item_view.findViewById(R.id.tvCoupon_status);
+                tvOrderId = item_view.findViewById(R.id.tvOrderId);//要寫物件item_view.findViewById，否則會找activity_main
+                tvOrderAcceptTime = item_view.findViewById(R.id.tvOrderAcceptTime);
+                tvOrderQuantity = item_view.findViewById(R.id.tvOrderQuantity);
+                tvOrderPrice = item_view.findViewById(R.id.tvOrderPrice);
+                ibOrderDetial = item_view.findViewById(R.id.ibOrderDetial);//看明細的按鈕
             }
         }
 
@@ -80,23 +111,37 @@ public class MemberHistoryFragment extends Fragment {
         @Override//View
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
-            View item_view = layoutInflater.inflate(R.layout.coupon_item_view, parent, false);
+            View item_view = layoutInflater.inflate(R.layout.history_item_view, parent, false);
             return new MyViewHolder(item_view);//建構式並呼叫服類別初始物件
         }
 
 
         @Override//Binding
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            final Coupon coupon =Coupons.get(position);//根據位置判斷
-            MyViewHolder myViewHolder = (MyViewHolder)holder;
-            myViewHolder.ivCouponPic.setImageResource(R.drawable.coupon_icon);
-            myViewHolder.tvCouponDate.setText(coupon.getCoupon_start() + " - " + coupon.getCoupon_end());
-            myViewHolder.tvCouponStatus.setText(coupon.getCoupon_status());
-            myViewHolder.ivCouponPic.setOnClickListener(new View.OnClickListener() {
+            final Order order = orders.get(position);//根據位置判斷
+            List<OrderDetail> orderDetails = order.getOrderDetailList();
+            int totalQuantity = 0;
+            double totalPrice = 0;
+            for(OrderDetail orderDetail : orderDetails){
+                totalPrice += orderDetail.getProduct_quantity()*orderDetail.getProduct_price();
+                totalQuantity += orderDetail.getProduct_quantity();
+            }
+            totalPrice = order.getCoupon_discount() == 0 ? totalPrice*1 : totalPrice*order.getCoupon_discount()/10;
+
+            MyViewHolder myViewHolder = (MyViewHolder) holder;
+            myViewHolder.tvOrderId.setText(String.valueOf(order.getOrder_id()));
+            myViewHolder.tvOrderAcceptTime.setText(order.getOrder_accept_time());
+            myViewHolder.tvOrderQuantity.setText(totalQuantity + "杯");
+            myViewHolder.tvOrderPrice.setText(Common.getDoubleToInt(totalPrice) + "元");
+            myViewHolder.ibOrderDetial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(context,coupon.getCoupon_discount(),Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(fragmentActivity, MemberHistoryDetailActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("order", order);
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
                 }
             });
         }
@@ -104,13 +149,36 @@ public class MemberHistoryFragment extends Fragment {
 
     }
 
-    //建Coupon物件
-    private List<Coupon> getCoupons() {
-        List<Coupon> Coupons = new ArrayList<>();
-        Coupons.add(new Coupon("1", "1", "001", "5折", "未使用", "2018-09-01", "2019-01-01"));
-        Coupons.add(new Coupon("2", "1", "002", "6折", "未使用", "2018-09-01", "2019-06-01"));
-        Coupons.add(new Coupon("3", "1", "003", "8折", "未使用", "2018-09-01", "2019-12-01"));
-        return Coupons;
+    //連server取List<Order>
+    private List<Order> getOrders(int member_id) {
+        String url = Common.URL + "/OrdersServlet";
+        List<Order> orders = null;
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("action", "findOrderHistoryByMemberId");
+        jsonObject.addProperty("member_id", member_id);
+        Log.d(TAG, "findOrderHistoryByMemberId jsonObject:" + jsonObject.toString());
+        String jsonOut = jsonObject.toString();
+        orderHistoryTask = new MyTask(url, jsonOut);
+        try {
+            String jsonIn = orderHistoryTask.execute().get();
+            Log.d(TAG, "findOrderHistoryByMemberId Result:" + jsonIn.toString());
+            Type listType = new TypeToken<List<Order>>() {
+            }.getType();
+            orders = new Gson().fromJson(jsonIn, listType);
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        if (orders == null || orders.isEmpty()) {
+            Common.showToast(fragmentActivity, R.string.msg_NoOrdersFound);
+        }
+        return orders;
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Common.closeAsyncTask(orderHistoryTask);
     }
 
 }

@@ -5,10 +5,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.math.BigDecimal;
 
 public class Common {
 //    public static String URL = "http://192.168.196.189:8080/Spot_MySQL_Web/";
@@ -48,7 +50,7 @@ public class Common {
         return srcBitmap;
     }
 
-    // check if the device connect to the network
+    //檢查是否連上網路
     public static boolean networkConnected(Activity activity) {
         ConnectivityManager conManager =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -62,6 +64,20 @@ public class Common {
 
     public static void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    //關閉AsyncTask
+    public static void closeAsyncTask(AsyncTask task){
+        if (task != null) {
+            task.cancel(true);
+            task = null;
+        }
+    }
+
+    //double to int四捨五入
+    public static int getDoubleToInt(double number) {
+        BigDecimal bd = new BigDecimal(number).setScale(0, BigDecimal.ROUND_HALF_UP);
+        return Integer.parseInt(bd.toString());
     }
 
 }
