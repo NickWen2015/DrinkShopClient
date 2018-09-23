@@ -117,6 +117,8 @@ public class MemberFunctionMenuFragment extends Fragment {
         cvMemberModify.setOnClickListener(listener);
         cvMemberCoupon.setOnClickListener(listener);
         cvMemberHistory.setOnClickListener(listener);
+        cvMemberOrderStatus.setOnClickListener(listener);
+
     }
 
     @Override
@@ -160,6 +162,14 @@ public class MemberFunctionMenuFragment extends Fragment {
 
                     break;
                 case R.id.cvMemberOrderStatus://訂單狀態查詢
+                    bundle = new Bundle();
+                    bundle.putSerializable("member", member);
+                    MemberOrderFragment memberOrderFragment = new MemberOrderFragment();
+                    memberOrderFragment.setArguments(bundle);
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction().
+                                replace(R.id.content, memberOrderFragment).addToBackStack(null).commit();
+                    }
 
                     break;
                 case R.id.cvMemberCoupon://會員優惠卷管理

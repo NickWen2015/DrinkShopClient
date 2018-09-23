@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e7e7e7"
+        android:padding="10dp">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_order_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="明細"
+                android:textColor="@color/colorBlack"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/ivQRCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_order_detail"
+                android:layout_gravity="center"
+                android:layout_marginTop="6dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivQRCode"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="12dp">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/item_view_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="12dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvOrderIdTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="訂單編號:"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvOrderId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/tvOrderIdTitle"
+                            android:text="12345"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvOrderDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvOrderIdTitle"
+                            android:layout_marginTop="10dp"
+                            android:text="訂單內容"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="18sp" />
+
+
+                        <TextView
+                            android:id="@+id/tvTatolPriceTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginTop="10dp"
+                            android:text="訂購價格:"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvTatolPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_toRightOf="@id/tvTatolPriceTitle"
+                            android:text="300元"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardview"
+                android:layout_marginLeft="250dp"
+                android:layout_marginTop="30dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="10dp">
+
+                <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/coordinator_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#5F94D2">
+
+                    <Button
+                        android:id="@+id/btBuyAgain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/buttonstyle"
+                        android:text="外送員追蹤"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </android.support.design.widget.CoordinatorLayout>
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

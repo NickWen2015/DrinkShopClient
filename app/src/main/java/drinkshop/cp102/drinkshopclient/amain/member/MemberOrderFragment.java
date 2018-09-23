@@ -26,18 +26,19 @@ import java.util.List;
 import drinkshop.cp102.drinkshopclient.Common;
 import drinkshop.cp102.drinkshopclient.R;
 import drinkshop.cp102.drinkshopclient.activity.MemberHistoryDetailActivity;
+import drinkshop.cp102.drinkshopclient.activity.MemberOrderDetailActivity;
 import drinkshop.cp102.drinkshopclient.bean.Member;
 import drinkshop.cp102.drinkshopclient.bean.Order;
 import drinkshop.cp102.drinkshopclient.bean.OrderDetail;
 import drinkshop.cp102.drinkshopclient.task.MyTask;
 
 /**
- * 歷史購買紀錄頁
+ * 訂單紀錄查詢
  *
  * @author Nick
  * @date 2018/9/1
  */
-public class MemberHistoryFragment extends Fragment {
+public class MemberOrderFragment extends Fragment {
     private SharedPreferences preferences;
     private static final String TAG = "MemberHFragment";
     private FragmentActivity fragmentActivity;
@@ -52,7 +53,7 @@ public class MemberHistoryFragment extends Fragment {
 
         fragmentActivity = getActivity();
         if (fragmentActivity != null) {
-            fragmentActivity.setTitle(R.string.textMemberHistory);
+            fragmentActivity.setTitle(R.string.textMemberMenuOrderStatus);
 
         }
         Bundle bundle = getArguments();
@@ -91,7 +92,7 @@ public class MemberHistoryFragment extends Fragment {
         }
 
         @Override
-        public int getItemCount() {//旅遊景點有幾個資料
+        public int getItemCount() {
             Log.d(TAG, "orders.size():" + orders.size());
             return orders.size();
         }
@@ -141,7 +142,7 @@ public class MemberHistoryFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = new Intent(fragmentActivity, MemberHistoryDetailActivity.class);
+                    Intent intent = new Intent(fragmentActivity, MemberOrderDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("order", order);
                     bundle.putInt("detailPrice",detailPrice);//帶到下一頁的總價
@@ -159,14 +160,14 @@ public class MemberHistoryFragment extends Fragment {
         String url = Common.URL + "/OrdersServlet";
         List<Order> orders = null;
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("action", "findOrderHistoryByMemberId");
+        jsonObject.addProperty("action", "findOrderByMemberId");
         jsonObject.addProperty("member_id", member_id);
-        Log.d(TAG, "findOrderHistoryByMemberId jsonObject:" + jsonObject.toString());
+        Log.d(TAG, "findOrderByMemberId jsonObject:" + jsonObject.toString());
         String jsonOut = jsonObject.toString();
         orderHistoryTask = new MyTask(url, jsonOut);
         try {
             String jsonIn = orderHistoryTask.execute().get();
-            Log.d(TAG, "findOrderHistoryByMemberId Result:" + jsonIn.toString());
+            Log.d(TAG, "findOrderByMemberId Result:" + jsonIn.toString());
             Type listType = new TypeToken<List<Order>>() {
             }.getType();
             orders = new Gson().fromJson(jsonIn, listType);
