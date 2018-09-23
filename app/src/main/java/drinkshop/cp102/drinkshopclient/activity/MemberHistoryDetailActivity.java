@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class MemberHistoryDetailActivity extends AppCompatActivity {
         tvOrderId = findViewById(R.id.tvOrderId);
         tvOrderDetail = findViewById(R.id.tvOrderDetail);
         tvTatolPrice = findViewById(R.id.tvTatolPrice);
-        btBuyAgain = findViewById(R.id.btBuyAgain);
+        btBuyAgain = findViewById(R.id.btDelivery);
         String orderDetailString = "";
         Bundle bundle = getIntent().getExtras();
         Order order = (Order) bundle.getSerializable("order");

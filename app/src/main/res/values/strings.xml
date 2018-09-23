@@ -63,5 +63,14 @@
     <string name="msg_NoFoundOrder">找不到訂單！</string>
     <string name="textPickUpTime">預計取貨時間：</string>
     <string name="textOfficiallanguage">感謝您的購買 歡迎下次再次光臨</string>
+    <!--onKeyDown AlertDialogFragment Message start-->
+    <string name="text_Exit">Exit App</string>
+    <string name="msg_WantToExit">真的要離開嗎？</string>
+    <string name="text_Yes">狠心離開</string>
+    <string name="text_No">再逛逛好了</string>
+    <string name="title_Delivery">外送員追蹤</string>
+    <string name="delivery_title">您的訂單正在運送途中,請耐心等候</string>
+    <string name="text_ShouldGrant">應授予訪問位置的權限</string>
+    <!--onKeyDown Message end-->
 
 </resources>

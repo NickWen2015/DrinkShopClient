@@ -111,7 +111,7 @@
             android:background="#5F94D2">
 
             <Button
-                android:id="@+id/btBuyAgain"
+                android:id="@+id/btDelivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
