@@ -26,14 +26,14 @@ import drinkshop.cp102.drinkshopclient.helper.LogHelper;
 import drinkshop.cp102.drinkshopclient.helper.ShoppingCartDBHelper;
 import drinkshop.cp102.drinkshopclient.server.Common;
 import drinkshop.cp102.drinkshopclient.server.task.CommonTask;
+import drinkshop.cp102.drinkshopclient.task.ImageTask;
 
 
 /**
- * 冷 = 0 熱 = 1
- * M = 0 L = 1
- * 正常糖 = 0 少糖 = 1 半糖 = 2 微糖 = 3 無糖 = 4
- * 正常冰 = 0 少冰 = 1 微冰 = 2 去冰 = 3
- * 正常熱 = 0 熱一點 = 1
+ * 冷 = 1 熱 = 2
+ * M = 1 L = 2
+ * 正常糖 = 1 少糖 = 2 半糖 = 3 微糖 = 4 無糖 = 5
+ * 正常冰 = 1 少冰 = 2 微冰 = 3 去冰 = 4 正常熱 = 5 熱一點 = 6
  * 添加選取的商品至購物車
  *
  * @author mrosstro
@@ -53,13 +53,14 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
     private SeekBar sbProductIce;  //產品冰塊
     private LinearLayout linearHot;
     private SeekBar sbProductHot;  //產品熱度
-    private Button btnAddingProductToShoppingCart;//加入/修改 購物車（btnAddingProductToShoppingCard（onClickAddingProductToShoppingCard））
+    private Button btnAddingProductToShoppingCart;  //加入/修改 購物車（btnAddingProductToShoppingCard（onClickAddingProductToShoppingCard））
 
     private ShoppingCart addingProduct; //購買的商品
     private int whereDoComeFrom;  //從哪裡來
 
     ShoppingCartDBHelper shoppingCartDBHelper = new ShoppingCartDBHelper(this);  //購物車資料庫
     private CommonTask productGetProductDetailTask;
+    private ImageTask productImageTask;
     private Activity activity;
     List<Product> productDetail;
 
@@ -96,9 +97,9 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
         getQuantity();
         getSuger();
         switch (addingProduct.getHotOrIce()) {
-            case 0:
-                getProductIce();
             case 1:
+                getProductIce();
+            case 2:
                 getProductHot();
         }
     }
@@ -111,6 +112,16 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
         int index = 0;
         Bundle bundle = getIntent().getExtras();
         int productID = bundle.getInt("ProductID");
+
+        String url = drinkshop.cp102.drinkshopclient.Common.URL + "/ProductServlet";
+        int productImageSize = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            productImageSize = ivProductImage.getHeight();
+            LogHelper.e(TAG, "productImageSize = " + productImageSize);
+        }
+        productImageTask = new ImageTask(url ,productID ,productImageSize ,ivProductImage);
+        productImageTask.execute();
+
         productDetail = getProductDetail(productID);
 
         /* 從哪裡來（新增（ProductPageFragment）= 0 ; 購物車的編輯（ShoppingCartActivity）= 1） */
@@ -124,12 +135,12 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
                         productDetail.get(index).getId(),
                         productDetail.get(index).getCategory(),
                         productDetail.get(index).getName(),
-                        0,
-                        0,
+                        1,
+                        1,
                         M,
                         1,
-                        0,
-                        0);
+                        1,
+                        1);
 
                 setTitle(addingProduct.getProductName());  // 產品名稱
                 linearIce.setVisibility(View.VISIBLE);  //開啟ICE的選項
@@ -157,12 +168,12 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
                 tvQuantity.setText(String.valueOf(addingProduct.getQuantity()));
                 sbSuger.setProgress(addingProduct.getSuger());
                 switch (addingProduct.getHotOrIce()) {
-                    case 0:
+                    case 1:
                         linearIce.setVisibility(View.VISIBLE);  //開啟ICE的選項
                         linearHot.setVisibility(View.GONE);  //關閉HOT的選項
                         sbProductIce.setProgress(addingProduct.getTemperature());
                         break;
-                    case 1:
+                    case 2:
                         linearHot.setVisibility(View.VISIBLE);  //開啟HOT的選項
                         linearIce.setVisibility(View.GONE);  //關閉ICE的選項
                         sbProductHot.setProgress(addingProduct.getTemperature());
@@ -210,7 +221,7 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
     public void onClickIce(View view) {
         linearIce.setVisibility(View.VISIBLE);  //開啟ICE的選項
         linearHot.setVisibility(View.GONE);  //關閉HOT的選項
-        addingProduct.setHotOrIce(0);
+        addingProduct.setHotOrIce(1);
         sbProductIce.setProgress(0);
     }
 
@@ -220,7 +231,7 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
     public void onClickHot(View view) {
         linearHot.setVisibility(View.VISIBLE);  //開啟HOT的選項
         linearIce.setVisibility(View.GONE);  //關閉ICE的選項
-        addingProduct.setHotOrIce(1);
+        addingProduct.setHotOrIce(2);
         sbProductHot.setProgress(0);
     }
 
@@ -228,7 +239,7 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
      * 觸發事件 按下容量（M）
      */
     public void onClickSizeM(View view) {
-        addingProduct.setSize(0);
+        addingProduct.setSize(1);
         addingProduct.setSizePrice(M);
     }
 
@@ -236,7 +247,7 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
      * 觸發事件 按下容量（L）
      */
     public void onClickSizeL(View view) {
-        addingProduct.setSize(1);
+        addingProduct.setSize(2);
         addingProduct.setSizePrice(L);
     }
 
@@ -290,7 +301,7 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
         sbSuger.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                addingProduct.setSuger(progress);
+                addingProduct.setSuger(progress + 1);
             }
 
             @Override
@@ -312,7 +323,7 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
         sbProductIce.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                addingProduct.setTemperature(progress);
+                addingProduct.setTemperature(progress + 1);
             }
 
             @Override
@@ -335,7 +346,7 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
         sbProductHot.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                addingProduct.setTemperature(progress);
+                addingProduct.setTemperature(progress + 5);
             }
 
             @Override

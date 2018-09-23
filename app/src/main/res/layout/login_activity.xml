@@ -77,7 +77,8 @@
                 android:text="@string/textMemberLogin"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"
+                android:onClick="onClickLogin"/>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 

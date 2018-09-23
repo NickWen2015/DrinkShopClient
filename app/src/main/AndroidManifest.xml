@@ -27,8 +27,17 @@
         <activity
             android:name=".amain.shoppingcart.ShoppingCartActivity"
             android:launchMode="singleTop" />
+
+        <activity
+            android:name=".amain.orderrecord.OrderRecordActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".amain.loginactivity.LoginDialogActivity"
+            android:launchMode="singleTop" />
+
         <activity android:name=".activity.MemberHistoryDetailActivity" />
         <activity android:name=".activity.MemberOrderDetailActivity"/>
+
     </application>
 
 </manifest>

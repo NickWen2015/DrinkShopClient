@@ -20,7 +20,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="30"
-                app:srcCompat="@color/colorGray" />
+                android:scaleType="fitCenter"
+                android:background="@drawable/product_default_img" />
 
             <LinearLayout
                 android:layout_width="0dp"

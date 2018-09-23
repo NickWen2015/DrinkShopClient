@@ -2,9 +2,11 @@ package drinkshop.cp102.drinkshopclient.amain.productpage;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.hardware.display.DisplayManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import drinkshop.cp102.drinkshopclient.Common;
 import drinkshop.cp102.drinkshopclient.R;
 import drinkshop.cp102.drinkshopclient.amain.addingproduct.AddingProductToShoppingCartActivity;
 import drinkshop.cp102.drinkshopclient.bean.Product;
@@ -20,6 +23,7 @@ import drinkshop.cp102.drinkshopclient.bean.ShoppingCart;
 import drinkshop.cp102.drinkshopclient.constant.MainActivityConstant;
 import drinkshop.cp102.drinkshopclient.helper.LogHelper;
 import drinkshop.cp102.drinkshopclient.helper.ShoppingCartDBHelper;
+import drinkshop.cp102.drinkshopclient.task.ImageTask;
 
 /**
  * 實作 RecyclerView.Adapter（建立 ProductPage(RecyclerView) 畫面）
@@ -32,7 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     private Activity activity;
     private LayoutInflater inflater;
     private List<Product> products;
-
+    private ImageTask productImageTask;
     private ShoppingCartDBHelper shoppingCartDBHelper;  //資料庫
 
     /**
@@ -96,6 +100,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         final Product product = products.get(position);
         int totalQuantityOfProduct = 0;
 
+        int productID = product.getId();
+        String url = Common.URL + "/ProductServlet";
+        int productImageSize = activity.getResources().getDisplayMetrics().widthPixels / 3;
+        LogHelper.e(TAG, "productImageSize = " + productImageSize);
+
+
         /* 取得產品數量 */
         if (shoppingCartDBHelper.readProductQuantity(product.getName()) != null) {
             for (ShoppingCart shoppingCart : shoppingCartDBHelper.readProductQuantity(product.getName())) {
@@ -103,6 +113,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             }
         }
         /* 設定內容 */
+        productImageTask = new ImageTask(url ,productID ,productImageSize ,viewHolder.ivProductImg);
+        productImageTask.execute();
+
         viewHolder.tvProductName.setText(product.getName());
         viewHolder.tvProductMPrice.setText("M : NT $ " + String.valueOf(product.getMPrice()));
         viewHolder.tvProductLPrice.setText("L : NT $ " + String.valueOf(product.getLPrice()));

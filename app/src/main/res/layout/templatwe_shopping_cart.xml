@@ -45,9 +45,8 @@
 
             <TextView
                 android:id="@+id/tvSubtotal"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="小計" />
@@ -55,26 +54,29 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="106dp">
 
             <ImageView
                 android:id="@+id/ivProductImage"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_launcher_background"
+                android:layout_weight="30"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/product_default_img"
                 tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:id="@+id/tvHotOrIceSizeSugerTemperature"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="45"
                 android:gravity="center"
                 android:text="冷熱/尺寸/甜度/溫度" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="25"
                 android:orientation="vertical">
 
                 <Button

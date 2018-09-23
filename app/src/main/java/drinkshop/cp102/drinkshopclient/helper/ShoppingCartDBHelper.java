@@ -21,7 +21,7 @@ import drinkshop.cp102.drinkshopclient.bean.ShoppingCartTotol;
 public class ShoppingCartDBHelper extends SQLiteOpenHelper {
     public static final String TAG = "ShoppingCartDBHelper";
     private static final String DATABASE_NAME = "DrinkShop.db";  //資料庫名稱
-    private static final int DATABASE_VERSION = 1;  //資料庫版本
+    private static final int DATABASE_VERSION = 2;  //資料庫版本
 
     private static final String TABLE_NAME = "shoppingcart";  //資料表名稱
     private static final String ID = "_id";
@@ -73,6 +73,15 @@ public class ShoppingCartDBHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
+    }
+
+
+    /**
+     * 清空資料表
+     * */
+    public void clearDB() {
+        getWritableDatabase().execSQL(SQL_DELETE_ENTRIES);
+        onCreate(getWritableDatabase());
     }
 
     /**

@@ -96,7 +96,6 @@ public class MemberFragment extends Fragment {
                     transaction.addToBackStack("fragmentMemberFunctionMenu");//＊＊手動加到Stack裏，並給名字可以讓user等等可以返回指定頁，可以給名字或不給名字transaction.addToBackStack(null)，等等只能回上一頁，不能回指定頁
                     transaction.commit();
                 } else {
-
                     String LoginError = getString(R.string.textLoginError);
                     etMember_account.setError(LoginError);
                     etMember_password.setError(LoginError);
@@ -155,7 +154,6 @@ public class MemberFragment extends Fragment {
             Log.e(TAG, e.toString());
         }
         return isUserValid;
-
     }
 
     @Override

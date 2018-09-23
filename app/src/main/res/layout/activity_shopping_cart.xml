@@ -23,13 +23,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="外帶" />
+            android:onClick="onClickTakeOut"
+            android:text="自取" />
 
         <Button
             android:id="@+id/btnOrderIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickOrderIn"
             android:text="外送" />
     </LinearLayout>
 
@@ -79,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickOrderCompleted"
             android:text="訂單完成" />
 
     </LinearLayout>

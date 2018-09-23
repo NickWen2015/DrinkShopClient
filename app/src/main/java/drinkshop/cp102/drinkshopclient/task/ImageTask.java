@@ -43,7 +43,7 @@ public class ImageTask extends AsyncTask<Object, Integer, Bitmap> {
     @Override
     protected Bitmap doInBackground(Object... params) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("action", "getImage");
+        jsonObject.addProperty("action", "getProductImage");
         jsonObject.addProperty("id", id);
         jsonObject.addProperty("imageSize", imageSize);
         return getRemoteImage(url, jsonObject.toString());
@@ -52,7 +52,7 @@ public class ImageTask extends AsyncTask<Object, Integer, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         ImageView imageView = imageViewWeakReference.get();
-        if (isCancelled() || imageView == null) {//有可能拿不傲
+        if (isCancelled() || imageView == null) {//有可能拿不到
             return;
         }
         if (bitmap != null) {
@@ -73,7 +73,7 @@ public class ImageTask extends AsyncTask<Object, Integer, Bitmap> {
             connection.setRequestMethod("POST");
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             bw.write(jsonOut);
-            Log.d(TAG, "output: " + jsonOut);
+            Log.e(TAG, "output: " + jsonOut);
             bw.close();
 
             int responseCode = connection.getResponseCode();

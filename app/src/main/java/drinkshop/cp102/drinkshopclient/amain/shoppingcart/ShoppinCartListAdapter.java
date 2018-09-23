@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import drinkshop.cp102.drinkshopclient.Common;
 import drinkshop.cp102.drinkshopclient.R;
 import drinkshop.cp102.drinkshopclient.amain.addingproduct.AddingProductToShoppingCartActivity;
 import drinkshop.cp102.drinkshopclient.bean.ShoppingCart;
@@ -24,12 +26,12 @@ import drinkshop.cp102.drinkshopclient.constant.ShoppingCartActivityConstant;
 import drinkshop.cp102.drinkshopclient.decoder.ProductDetails;
 import drinkshop.cp102.drinkshopclient.helper.LogHelper;
 import drinkshop.cp102.drinkshopclient.helper.ShoppingCartDBHelper;
+import drinkshop.cp102.drinkshopclient.task.ImageTask;
 
 /**
  * 實作 RecyclerView.Adapter（建立 ShoppingCartActivity(RecyclerView) 畫面）
  *
  * @author mrosstro
- * @date 2018/9/7
  */
 public class ShoppinCartListAdapter extends RecyclerView.Adapter<ShoppinCartListAdapter.MyViewHolder> {
     public static final String TAG = "ShoppinCartListAdapter";
@@ -38,11 +40,13 @@ public class ShoppinCartListAdapter extends RecyclerView.Adapter<ShoppinCartList
     ShoppingCartDBHelper shoppingCartDBHelper;
     WeakReference<TextView> textViewWeakReferenceTotalAmount;
     WeakReference<TextView> textViewWeakReferenceTotalCap;
+    WeakReference<Button> buttonWeakReferenceOrderCompleted;
 
-    public ShoppinCartListAdapter(Activity activity, TextView tvTotalCap,TextView tvTotalAmount) {
+    public ShoppinCartListAdapter(Activity activity, TextView tvTotalCap,TextView tvTotalAmount, Button btnOrderCompleted) {
         this.activity = activity;
         this.textViewWeakReferenceTotalAmount = new WeakReference<>(tvTotalAmount);
         this.textViewWeakReferenceTotalCap = new WeakReference<>(tvTotalCap);
+        this.buttonWeakReferenceOrderCompleted = new WeakReference<>(btnOrderCompleted);
     }
 
     /**
@@ -106,6 +110,11 @@ public class ShoppinCartListAdapter extends RecyclerView.Adapter<ShoppinCartList
         final ShoppingCart shoppingCart = shoppingCartList.get(position);
         ProductDetails productDetails = new ProductDetails();
 
+        int productID = shoppingCart.getID();
+        String url = Common.URL + "/ProductServlet";
+        int productImageSize = activity.getResources().getDisplayMetrics().widthPixels / 3;
+        LogHelper.e(TAG, "productImageSize = " + productImageSize);
+
         setTotalCapAndTotalAmount();  //設定總金額 及 總杯數
 
         //定義 UI 內容
@@ -119,6 +128,9 @@ public class ShoppinCartListAdapter extends RecyclerView.Adapter<ShoppinCartList
                 productDetails.valueOfTemperature(shoppingCart.getHotOrIce(), shoppingCart.getTemperature());
 
         //設定 UI 內容
+        ImageTask productImageTask = new ImageTask(url, productID, productImageSize, viewHolder.ivProductImage);
+        productImageTask.execute();
+
         viewHolder.tvProductName.setText(showProductName);
         viewHolder.tvQuantity.setText("*" + showQuantity + "杯");
         viewHolder.tvPrice.setText("(單價：NT$" + showPrice + ")");
@@ -148,6 +160,7 @@ public class ShoppinCartListAdapter extends RecyclerView.Adapter<ShoppinCartList
                 shoppingCartDBHelper.deleteProduct(shoppingCart.getID());
                 ShoppinCartListAdapter.this.notifyDataSetChanged();
                 setTotalCapAndTotalAmount();  //設定總金額 及 總杯數
+
             }
         });
 
@@ -167,5 +180,11 @@ public class ShoppinCartListAdapter extends RecyclerView.Adapter<ShoppinCartList
         textViewWeakReferenceTotalCap.get().setText("總杯數：" + totalCap);
         textViewWeakReferenceTotalAmount.get().setText("總金額：" + totalAmount);
         LogHelper.e(TAG, "setTotalCapAndTotalAmount：\n總杯數：" + totalCap + "\n總金額：" + totalAmount);
+    }
+
+    private void buttonWeakReferenceOrderCompleted() {
+
+        buttonWeakReferenceOrderCompleted.get().setEnabled(false);
+        buttonWeakReferenceOrderCompleted.get().setEnabled(true);
     }
 }
