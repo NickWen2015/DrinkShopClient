@@ -13,8 +13,8 @@ import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 
 public class Common {
-    public static String URL = "http://192.168.1.85:8080/DrinkShop_Web/";
-//    public static String URL = "http://10.0.2.2:8080/DrinkShop_Web";
+//    public static String URL = "http://192.168.1.85:8080/DrinkShop_Web/";
+    public static String URL = "http://10.0.2.2:8080/DrinkShop_Web";
     public final static String PREF_FILE = "preference";
     private static final String TAG = "Common";
 
