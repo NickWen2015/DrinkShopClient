@@ -6,6 +6,7 @@
     <string name="textMember">會員中心</string>
     <string name="textMap">地圖</string>
     <string name="textSettings">設定</string>
+    <string name="textOrderOnline">即時訂購</string>
     <string name="textShoppingCart">購物車</string>
     <!--BottomNavigationView end-->
     <!--會員中心 start-->
@@ -71,6 +72,11 @@
     <string name="title_Delivery">外送員追蹤</string>
     <string name="delivery_title">您的訂單正在運送途中,請耐心等候</string>
     <string name="text_ShouldGrant">應授予訪問位置的權限</string>
+    <string name="text_Connect">開始連線</string>
+    <string name="text_Disconnect">結束連線</string>
+    <string name="text_MessageEmpty">您沒有輸入訊息</string>
+    <string name="text_LeftChatRoom">離開聊天室</string>
+    <string name="text_NoCameraApp">手機無拍照app</string>
     <!--onKeyDown Message end-->
 
 </resources>

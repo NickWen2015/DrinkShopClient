@@ -21,6 +21,7 @@ import android.view.MenuItem;
 
 import drinkshop.cp102.drinkshopclient.Common;
 import drinkshop.cp102.drinkshopclient.R;
+import drinkshop.cp102.drinkshopclient.activity.MemberOrderDetailActivity;
 import drinkshop.cp102.drinkshopclient.amain.member.MemberFragment;
 import drinkshop.cp102.drinkshopclient.amain.member.MemberFunctionMenuFragment;
 import drinkshop.cp102.drinkshopclient.amain.news.NewsFragment;
@@ -29,6 +30,7 @@ import drinkshop.cp102.drinkshopclient.amain.settings.SettingsFragment;
 import drinkshop.cp102.drinkshopclient.amain.shoppingcart.ShoppingCartActivity;
 import drinkshop.cp102.drinkshopclient.helper.BottomNavigationViewHelper;
 import drinkshop.cp102.drinkshopclient.helper.ShoppingCartDBHelper;
+import drinkshop.cp102.drinkshopclient.wsOrderOnline.OrderOnlineMainActivity;
 
 /**
  * APP的入口
@@ -70,10 +72,22 @@ public class MainActivity extends AppCompatActivity {
                         changeFragment(fragment);
                         setTitle(R.string.textMember);
                         return true;
-                    case R.id.item_Settings:  //設定
-                        fragment = new SettingsFragment();
-                        changeFragment(fragment);
-                        setTitle(R.string.textSettings);
+                    case R.id.item_OrderOnline:  //即時訂購
+                        if (getLoginStatus()) {//取得登入狀態
+                            Intent intent = new Intent(MainActivity.this, OrderOnlineMainActivity.class);
+                            Bundle bundle = new Bundle();
+                            SharedPreferences preferences = getSharedPreferences("preference", MODE_PRIVATE);
+                            int member_id = preferences.getInt("member_id", 0);
+                            bundle.putInt("member_id", member_id);//帶到下一頁的會員id
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            setTitle(R.string.textOrderOnline);
+                        } else {
+                            fragment = new MemberFragment();
+                            setTitle(R.string.textMember);
+                            changeFragment(fragment);
+                        }
+
                         return true;
                     default:
                         initContent();

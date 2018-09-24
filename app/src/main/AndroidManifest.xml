@@ -14,13 +14,24 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <!--API Key-->
+        <!-- API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB92k918vuihXRhvwz1wkRhJSy2ESpLguA" />
+
         <activity
             android:name=".amain.MainActivity"
             android:launchMode="singleTop">
@@ -36,19 +47,20 @@
         <activity
             android:name=".amain.shoppingcart.ShoppingCartActivity"
             android:launchMode="singleTop" />
-
         <activity
             android:name=".amain.orderrecord.OrderRecordActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".amain.loginactivity.LoginDialogActivity"
             android:launchMode="singleTop" />
-
         <activity android:name=".activity.MemberHistoryDetailActivity" />
-        <activity android:name=".activity.MemberOrderDetailActivity"/>
+        <activity android:name=".activity.MemberOrderDetailActivity" />
         <activity
             android:name=".activity.DeliveryActivity"
             android:label="@string/title_Delivery" />
+        <activity android:name=".wsOrderOnline.AllChatActivity" />
+        <activity android:name=".wsOrderOnline.OrderOnlineActivity" />
+        <activity android:name=".wsOrderOnline.OrderOnlineMainActivity" />
     </application>
 
 </manifest>
