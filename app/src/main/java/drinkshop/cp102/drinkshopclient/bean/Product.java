@@ -3,10 +3,10 @@ package drinkshop.cp102.drinkshopclient.bean;
 /**
  * 商品
  * @author mrosstro
- * @date 2018/8/29
  * */
 public class Product {
     private int id;
+    private int categoryId;
     private String Category;
     private String Name;
     private int MPrice;
@@ -28,6 +28,14 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategory() {
