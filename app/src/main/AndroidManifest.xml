@@ -61,6 +61,9 @@
         <activity android:name=".wsOrderOnline.AllChatActivity" />
         <activity android:name=".wsOrderOnline.OrderOnlineActivity" />
         <activity android:name=".wsOrderOnline.OrderOnlineMainActivity" />
+        <activity android:name=".activity.NewsActivity">
+
+        </activity>
     </application>
 
 </manifest>

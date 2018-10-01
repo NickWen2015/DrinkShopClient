@@ -165,18 +165,18 @@ public class AddingProductToShoppingCartActivity extends AppCompatActivity {
                         editProductDetail.get(index).getTemperature());
 
                 setTitle(addingProduct.getProductName());  // 產品名稱
-                tvQuantity.setText(String.valueOf(addingProduct.getQuantity()));
-                sbSuger.setProgress(addingProduct.getSuger());
+                tvQuantity.setText(String.valueOf(addingProduct.getQuantity()));  // 產品數量
+                sbSuger.setProgress(addingProduct.getSuger() - 1);  //產品甜度
                 switch (addingProduct.getHotOrIce()) {
                     case 1:
                         linearIce.setVisibility(View.VISIBLE);  //開啟ICE的選項
                         linearHot.setVisibility(View.GONE);  //關閉HOT的選項
-                        sbProductIce.setProgress(addingProduct.getTemperature());
+                        sbProductIce.setProgress(addingProduct.getTemperature() - 1);  // 產品溫度
                         break;
                     case 2:
                         linearHot.setVisibility(View.VISIBLE);  //開啟HOT的選項
                         linearIce.setVisibility(View.GONE);  //關閉ICE的選項
-                        sbProductHot.setProgress(addingProduct.getTemperature());
+                        sbProductHot.setProgress(addingProduct.getTemperature() - 1);  // 產品溫度
                         break;
                 }
                 btnAddingProductToShoppingCart.setText(R.string.text_EditProductToShoppingCart);

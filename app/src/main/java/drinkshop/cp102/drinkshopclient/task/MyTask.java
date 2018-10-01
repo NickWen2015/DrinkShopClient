@@ -36,7 +36,7 @@ public class MyTask extends AsyncTask<String, Integer, String> {
             connection.setChunkedStreamingMode(0);
             connection.setUseCaches(false); // do not use a cached copy
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("charset", "UTF-8");
+            connection.setRequestProperty("charset", "utf-8");
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             bw.write(outStr);
             Log.d(TAG, "output: " + outStr);

@@ -95,11 +95,19 @@ public class ShoppingCartActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == ShoppingCartActivityConstant.SHOPPING_CART) {
             updateRecyclerView();
-        } else if(requestCode == ShoppingCartActivityConstant.LOGIN_DIALOG) {
-            orderInsert();
+        }
 
+        if(requestCode == ShoppingCartActivityConstant.LOGIN_DIALOG) {
+            if(resultCode == RESULT_CANCELED) {
+                LogHelper.e(TAG, "resultCode = " + resultCode);
+
+            } else {
+                LogHelper.e(TAG, "resultCode = " + resultCode + "use orderInsert()");
+                orderInsert();
+            }
         }
     }
 
