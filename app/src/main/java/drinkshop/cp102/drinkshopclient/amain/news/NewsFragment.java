@@ -23,6 +23,7 @@ import java.util.List;
 
 import drinkshop.cp102.drinkshopclient.R;
 import drinkshop.cp102.drinkshopclient.bean.News;
+import drinkshop.cp102.drinkshopclient.helper.LogHelper;
 import drinkshop.cp102.drinkshopclient.server.Common;
 import drinkshop.cp102.drinkshopclient.server.task.CommonTask;
 
@@ -33,7 +34,7 @@ import drinkshop.cp102.drinkshopclient.server.task.CommonTask;
 public class NewsFragment extends Fragment {
     public static final String TAG = "NewsFragment";
     private ViewPager viewPager;
-    private boolean isRunning = true;  //開關（暫無作用）
+    private boolean isRunning = false;  //開關
     private FragmentActivity fragmentActivity;
 
     /**
@@ -56,7 +57,7 @@ public class NewsFragment extends Fragment {
         View newsFragment = inflater.inflate(R.layout.news_fragment, container, false);
         viewPager = newsFragment.findViewById(R.id.view_pager);
         initData();
-        startLunBO();
+
     }
 
     /**
@@ -96,6 +97,21 @@ public class NewsFragment extends Fragment {
 
         int pos = (Integer.MAX_VALUE / 2) - (Integer.MAX_VALUE / 2 % myNews.size());
         viewPager.setCurrentItem(pos);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogHelper.e(TAG, "onStart");
+        isRunning = true;
+        startLunBO();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        isRunning = false;
     }
 
     /**
